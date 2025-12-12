@@ -24,7 +24,9 @@ ser usado nas mensagens criptografadas.
 tabela_int = {valor_decimal: valor_char for valor_char, valor_decimal in tabela_char.items()}
 
 '''
-
+Baseado nas tabelas de conversão, transforma uma mensagem no número inteiro decimal
+correspondente. No processo, divide a string em pedaços menores de acordo com um
+tamanho máximo (definido por n = pq) e barra caracteres inválidos.
 '''
 def converter_para_decimal(msg: str):
     partes_string = [""]
