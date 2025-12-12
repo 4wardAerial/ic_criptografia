@@ -24,7 +24,11 @@ Gera um valor para e, 1 < e < phi(n), coprimo com o totiente (phi(n)) para
 ser usado no RSA.
 '''
 def escolha_e(phi: int) -> int:
+    e = 65537  # Aparentemente esse é um valor comum para e
+    if alg_euclides_extendido(e, phi)[0] == 1:
+        return e
+    # Se aquele e não funcionar, escolhe outro não tão grande
     while True:
-        e = random.randrange(3, phi - 1, 2)
+        e = random.randrange(3, 2**32, 2)
         if alg_euclides_extendido(e, phi)[0] == 1:
             return e

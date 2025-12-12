@@ -35,8 +35,7 @@ if __name__ == "__main__":
     n, e, d = calculadora_chaves_RSA(p, q)
 
     msg_teste = "Msg bem grande essa kkkkkkk ou sera?"
-    max_tam = len(str(n)) - 1
-    partes_decimal = cm.converter_para_decimal(msg_teste, max_tam)
+    partes_decimal = cm.converter_para_decimal(msg_teste, n)
     print(partes_decimal)
 
     partes_cripto = RSA_cripto(partes_decimal, n, e)
