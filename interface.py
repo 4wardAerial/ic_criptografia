@@ -17,9 +17,18 @@ def cadastro(nome: str):
     print("\nDigite o número referente a sua escolha:")
     print("1. Fornecer os próprios primos")
     print("2. Usar primos aleatórios")
-    escolha_primos = input("> ")
+    escolha_primos = int(input("> "))
 
-pass
+    if escolha_primos == 1:
+        print("Digite seu primeiro primo:")
+        p = int(input("> "))
+        print("Digite seu segundo primo:")
+        q = int(input("> "))
+    elif escolha_primos == 2:
+        pass
+    else:
+        print("Entrada inválida! Primos serão escolhidos aleatoriamente.")
+        
 
 def login():
     usuarios = carregar_usuarios()
