@@ -53,6 +53,11 @@ def converter_para_decimal(msg: str, n: int) -> list[int]:
         decimais.append(int(parte_decimal))
     return decimais
 
+'''
+Baseado na tabela inversa de conversão, transforma uma lista de inteiros decimais
+numa única string correspondente. Caso encontre um valor sem char relacionado, 
+printa um '#' no lugar.  
+'''
 def converter_para_string(partes_decimal: list[int]) -> str:
     string = ""
 
@@ -64,7 +69,7 @@ def converter_para_string(partes_decimal: list[int]) -> str:
             dec_str = "0" + dec_str
         
         for i in range(0, len(dec_str), 2):
-            valor_int = int(dec_str[i:i+2])
+            valor_int = int(dec_str[i:i+2])  # Pega caracteres 2 a 2
             if valor_int not in tabela_int:
                 string += '#'
             else:
