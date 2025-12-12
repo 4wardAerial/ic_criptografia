@@ -12,7 +12,7 @@ tabela_char = {
     'Q': 52, 'R': 53, 'S': 54, 'T': 55, 'U': 56, 'V': 57, 'W': 58, 'X': 59,
     'Y': 60, 'Z': 61,
 
-    ',': 62, '.': 63, ' ': 64
+    ',': 62, '.': 63, '!': 64, '?': 65, ' ': 66
 }
 
 '''
@@ -20,3 +20,19 @@ Dicionário inverso, com o valor de cada caractere para cada valor decimal que p
 ser usado nas mensagens criptografadas.
 '''
 tabela_int = {valor_decimal: valor_char for valor_char, valor_decimal in tabela_char.items()}
+
+'''
+
+'''
+def converter_para_decimal(msg: str) -> int:
+    string_decimal = ""
+    for c in msg:
+        string_decimal += str(tabela_char.get(c))
+    
+    decimal = int(string_decimal)
+    return decimal
+
+
+if __name__ == "__main__":
+    msg_teste = "Teste, testando, ola, tudo bem???"
+    print(converter_para_decimal(msg_teste))
