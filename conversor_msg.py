@@ -28,11 +28,10 @@ Baseado nas tabelas de conversão, transforma uma mensagem no número inteiro de
 correspondente. No processo, divide a string em pedaços menores de acordo com um
 tamanho máximo (definido por n = pq) e barra caracteres inválidos.
 '''
-def converter_para_decimal(msg: str):
+def converter_para_decimal(msg: str, max_tam: int):
     partes_string = [""]
 
     cont_tam = 0
-    max_tam = 10
     i = 0
     for c in msg:
         if c not in tabela_char:
@@ -49,5 +48,5 @@ def converter_para_decimal(msg: str):
 
 
 if __name__ == "__main__":
-    msg_teste = "Bacana ba1a1a"
-    print(converter_para_decimal(msg_teste))
+    msg_teste = "Mensagem de teste"
+    print(converter_para_decimal(msg_teste, 10))
