@@ -44,3 +44,5 @@ if __name__ == "__main__":
 
     partes_decripto = RSA_decripto(partes_cripto, d, n)
     print(partes_decripto)
+
+    print(cm.converter_para_string(partes_decripto))

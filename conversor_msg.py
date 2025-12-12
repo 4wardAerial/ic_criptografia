@@ -28,7 +28,7 @@ Baseado nas tabelas de conversão, transforma uma mensagem no número inteiro de
 correspondente. No processo, divide a string em pedaços menores de acordo com um
 tamanho máximo (definido por n = pq) e barra caracteres inválidos.
 '''
-def converter_para_decimal(msg: str, max_tam: int):
+def converter_para_decimal(msg: str, max_tam: int) -> list[int]:
     partes_string = [""]
 
     cont_tam = 0
@@ -46,6 +46,19 @@ def converter_para_decimal(msg: str, max_tam: int):
     partes_decimal = [int(ps) for ps in partes_string]
     return partes_decimal
 
+def converter_para_string(partes_decimal: list[int]) -> str:
+    string = ""
+
+    for dec in partes_decimal:
+        dec_str = str(dec)
+        
+        cont_tam = 0
+        while cont_tam < len(dec_str):
+            num: str = dec_str[cont_tam] + dec_str[cont_tam + 1]
+            string += str(tabela_int.get(int(num)))
+            cont_tam += 2
+
+    return string
 
 if __name__ == "__main__":
     msg_teste = "Mensagem de teste"
