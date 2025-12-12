@@ -1,3 +1,5 @@
+from erros import CharInvalidoError
+
 '''
 Dicionário com valor decimal de cada caractere que poderá ser usado nas mensagens.
 '''
@@ -24,15 +26,26 @@ tabela_int = {valor_decimal: valor_char for valor_char, valor_decimal in tabela_
 '''
 
 '''
-def converter_para_decimal(msg: str) -> int:
-    string_decimal = ""
+def converter_para_decimal(msg: str):
+    partes_string = [""]
+
+    cont_tam = 0
+    max_tam = 10
+    i = 0
     for c in msg:
-        string_decimal += str(tabela_char.get(c))
-    
-    decimal = int(string_decimal)
-    return decimal
+        if c not in tabela_char:
+            raise CharInvalidoError(c)
+        if cont_tam >= max_tam:
+            partes_string.append("")
+            i += 1
+            cont_tam = 0
+        partes_string[i] += str(tabela_char.get(c))
+        cont_tam += 2
+
+    partes_decimal = [int(ps) for ps in partes_string]
+    return partes_decimal
 
 
 if __name__ == "__main__":
-    msg_teste = "Teste, testando, ola, tudo bem???"
+    msg_teste = "Bacana ba1a1a"
     print(converter_para_decimal(msg_teste))
