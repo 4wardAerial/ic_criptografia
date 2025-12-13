@@ -1,6 +1,5 @@
 from time import sleep
-from pathlib import Path
-from criptografador import *
+
 import os
 
 def cls():
@@ -18,7 +17,8 @@ def escolha_opcoes(opcoes: tuple) -> int:
 
 def inicio():
     cls()
-    print("\nBem-vind@ ao sistema.")
+    print("\n---------------------")
+    print("Bem-vind@ ao sistema.")
     print("---------------------")
 
 def tipo_de_cripto() -> int:
@@ -41,4 +41,27 @@ def critpo_ou_decripto() -> int:
     sleep(1)
     return escolha_opcoes((1, 2))
 
+def RSA_cripto():
+    pass
+
+def RSA_decripto() -> tuple:
+    cls()
+    print("\n---------------------")
+    print("Decriptografia RSA")
+    print("---------------------")
+    sleep(1)
+    print("\nInsira a mensagem cifrada:")
+    sleep(1)
+    cyph = input("> ")
+    sleep(1)
+    print("\nInsira sua chave privada:")
+    sleep(1)
+    cpriv_d = int(input("> "))
+    return (cyph, cpriv_d)
+
+def print_decriptografada(msg: str):
+    print("\nA mensagem decriptografada é:")
+    for c in msg:
+        sleep(0.1)
+        print(c)
 

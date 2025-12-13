@@ -1,6 +1,7 @@
 import random
-import conversor_msg as cm
 from pathlib import Path
+
+import conversor_msg as cm
 from funcoes import alg_euclides_extendido, escolha_e
 
 def RSA_cripto(partes_decimal: list[int], cpub_n: int, cpub_e: int) -> list[int]:
@@ -23,6 +24,9 @@ def calculadora_chaves_RSA(p: int, q: int):
     d: int = mdc[1] % phi
     return n, e, d
 
+
+
+
 if __name__ == "__main__":
     DIR = Path(__file__).resolve().parent
     primos_txt = DIR / "arquivos" / "primos.txt"
@@ -33,6 +37,7 @@ if __name__ == "__main__":
         q = int(primos[random.randrange(1, total_primos, 2)])
 
     n, e, d = calculadora_chaves_RSA(p, q)
+    print(f"{n} {e} {d}")
 
     msg_teste = "Hello World!"
     partes_decimal = cm.converter_para_decimal(msg_teste, n)
