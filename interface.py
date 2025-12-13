@@ -1,7 +1,10 @@
-import csv
-import time
+from time import sleep
 from pathlib import Path
 from criptografador import *
+import os
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 def escolha_opcoes(opcoes: tuple) -> int:
     print("\nDigite o número correspondente a sua escolha:")
@@ -13,29 +16,29 @@ def escolha_opcoes(opcoes: tuple) -> int:
         else:
             return escolha
 
-def carregar_usuarios():
-    pass
-
-def cadastro(nome: str):
-    pass
-        
-
-def login():
-    pass
-
-def critpo_ou_decripto() -> int:
-    print("O que você deseja fazer com sua mensagem?")
-    print("1) Criptografá-la")
-    print("2) Descriptografá-la")
-
-    return escolha_opcoes((1, 2))
+def inicio():
+    cls()
+    print("\nBem-vind@ ao sistema.")
+    print("---------------------")
 
 def tipo_de_cripto() -> int:
-    print("Qual sistema criptográfico deseja utilizar?")
+    print("\nQual sistema criptográfico deseja utilizar?")
+    sleep(1)
     print("1) RSA")
+    sleep(0.5)
     print("2) ElGamal")
+    sleep(0.5)
     print("3) Polinomial")
-
+    sleep(1)
     return escolha_opcoes((1, 2, 3))
+
+def critpo_ou_decripto() -> int:
+    print("\nO que você deseja fazer com sua mensagem?")
+    sleep(1)
+    print("1) Criptografá-la")
+    sleep(0.5)
+    print("2) Descriptografá-la")
+    sleep(1)
+    return escolha_opcoes((1, 2))
 
 
