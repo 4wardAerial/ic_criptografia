@@ -16,7 +16,7 @@ if __name__ == "__main__":
         DIR = Path(__file__).resolve().parent
         primos_txt = DIR / "arquivos" / "dados_usuario.txt"
         with primos_txt.open(encoding="utf-8") as dutxt:
-            cpub_n = int(dutxt.readlines()[1])
+            cpub_n = int(dutxt.readlines()[0])
 
         if c_ou_d == 1:
             inter.RSA_cripto()
@@ -25,7 +25,6 @@ if __name__ == "__main__":
             partes_cripto: list[int] = cvm.string_para_lista_int(cyph)
             partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)
             msg: str = cvm.converter_para_string(partes_decripto)
-            print(msg)
             inter.print_decriptografada(msg)
 
     elif tipo_c == 2:  # ElGamal

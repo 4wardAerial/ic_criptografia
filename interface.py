@@ -61,7 +61,5 @@ def RSA_decripto() -> tuple:
 
 def print_decriptografada(msg: str):
     print("\nA mensagem decriptografada é:")
-    for c in msg:
-        sleep(0.1)
-        print(c)
+    print(msg)
 
