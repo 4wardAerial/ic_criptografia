@@ -29,6 +29,9 @@ correspondente. No processo, divide a string em pedaços menores de acordo com u
 tamanho máximo (definido por n = pq) e barra caracteres inválidos.
 '''
 def converter_para_decimal(msg: str, n: int) -> list[int]:
+    # Como todo char está entre 10 e 66, todos tem 2 algarimos, então o tamanho 
+    # máximo de cada partição da string tem que se, em chars, metade da qntd. 
+    # de algarimos
     max_chars = (len(str(n)) - 1) // 2
     decimais = []
     parte_decimal = ""
@@ -79,4 +82,4 @@ def converter_para_string(partes_decimal: list[int]) -> str:
 
 if __name__ == "__main__":
     msg_teste = "Mensagem de teste"
-    print(converter_para_decimal(msg_teste, 10))
+    print(converter_para_string(converter_para_decimal(msg_teste, 100)))
