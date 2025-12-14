@@ -7,7 +7,6 @@ def cls():
 
 def escolha_opcoes(opcoes: tuple) -> int:
     print("\nDigite o número correspondente a sua escolha:")
-
     while(True):
         escolha = int(input("> "))
         if escolha not in opcoes:
@@ -17,28 +16,47 @@ def escolha_opcoes(opcoes: tuple) -> int:
 
 def inicio():
     cls()
+    print("\nBem-vind@ ao sistema.")
+    print("---------------------")
+
+def repetir() -> int:
+    sleep(0.7)
     print("\n---------------------")
-    print("Bem-vind@ ao sistema.")
+    print("Deseja continuar no sistema?")
+    sleep(0.7)
+    print("1) Sim")
+    sleep(0.5)
+    print("2) Não")
+    sleep(0.5)
+    return escolha_opcoes((1, 2))
+
+def voltar():
+    cls()
+    print("\n---------------------")
+    
+def sair():
+    sleep(1)
+    print("\nObrigad@ por usar o sistema.")
     print("---------------------")
 
 def tipo_de_cripto() -> int:
     print("\nQual sistema criptográfico deseja utilizar?")
-    sleep(1)
+    sleep(0.7)
     print("1) RSA")
     sleep(0.5)
     print("2) ElGamal")
     sleep(0.5)
     print("3) Polinomial")
-    sleep(1)
+    sleep(0.7)
     return escolha_opcoes((1, 2, 3))
 
 def critpo_ou_decripto() -> int:
     print("\nO que você deseja fazer com sua mensagem?")
-    sleep(1)
+    sleep(0.7)
     print("1) Criptografá-la")
     sleep(0.5)
     print("2) Descriptografá-la")
-    sleep(1)
+    sleep(0.7)
     return escolha_opcoes((1, 2))
 
 def RSA_cripto():
@@ -46,16 +64,15 @@ def RSA_cripto():
 
 def RSA_decripto() -> tuple:
     cls()
-    print("\n---------------------")
-    print("Decriptografia RSA")
+    print("\nDecriptografia RSA")
     print("---------------------")
-    sleep(1)
+    sleep(0.7)
     print("\nInsira a mensagem cifrada:")
-    sleep(1)
+    sleep(0.7)
     cyph = input("> ")
-    sleep(1)
+    sleep(0.7)
     print("\nInsira sua chave privada:")
-    sleep(1)
+    sleep(0.7)
     cpriv_d = int(input("> "))
     return (cyph, cpriv_d)
 
