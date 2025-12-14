@@ -14,6 +14,9 @@ def escolha_opcoes(opcoes: tuple) -> int:
             print("Selecione uma opção válida.")
         else:
             return escolha
+    
+def escolha_nomes():
+    pass
 
 def inicio():
     cls()
@@ -64,6 +67,7 @@ def listar_nomes():
     DIR = Path(__file__).resolve().parent
     outros_csv = DIR / "arquivos" / "dados_outros.csv"
     with outros_csv.open(encoding="utf-8") as docsv:
+        pass
 
 
 def RSA_cripto():
@@ -72,6 +76,9 @@ def RSA_cripto():
     print("---------------------")
     sleep(0.7)
     print("Para quem você quer enviar uma mensagem?")
+    listar_nomes()
+    sleep(0.7)
+    return escolha_nomes()
 
 def RSA_decripto() -> tuple:
     cls()
