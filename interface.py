@@ -1,4 +1,5 @@
 from time import sleep
+from pathlib import Path
 
 import os
 
@@ -59,8 +60,18 @@ def critpo_ou_decripto() -> int:
     sleep(0.7)
     return escolha_opcoes((1, 2))
 
+def listar_nomes():
+    DIR = Path(__file__).resolve().parent
+    outros_csv = DIR / "arquivos" / "dados_outros.csv"
+    with outros_csv.open(encoding="utf-8") as docsv:
+
+
 def RSA_cripto():
-    pass
+    cls()
+    print("\nCriptografia RSA")
+    print("---------------------")
+    sleep(0.7)
+    print("Para quem você quer enviar uma mensagem?")
 
 def RSA_decripto() -> tuple:
     cls()

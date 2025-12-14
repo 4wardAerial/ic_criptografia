@@ -16,9 +16,9 @@ if __name__ == "__main__":
 
         if tipo_c == 1:  # RSA
             DIR = Path(__file__).resolve().parent
-            primos_txt = DIR / "arquivos" / "dados_usuario.txt"
-            with primos_txt.open(encoding="utf-8") as dutxt:
-                cpub_n = int(dutxt.readlines()[0])
+            usuario_txt = DIR / "arquivos" / "dados_usuario.txt"
+            with usuario_txt.open(encoding="utf-8") as dutxt:
+                cpub_n = int(dutxt.readlines()[0])  # Lê a chave pública n do arquivo do usuário
 
             if c_ou_d == 1:
                 inter.RSA_cripto()

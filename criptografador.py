@@ -24,10 +24,8 @@ def calculadora_chaves_RSA(p: int, q: int):
     d: int = mdc[1] % phi
     return n, e, d
 
-
-
-
 if __name__ == "__main__":
+    '''
     DIR = Path(__file__).resolve().parent
     primos_txt = DIR / "arquivos" / "primos.txt"
     with primos_txt.open(encoding="utf-8") as ptxt:
@@ -50,3 +48,5 @@ if __name__ == "__main__":
     print(partes_decripto)
 
     print(cm.converter_para_string(partes_decripto))
+    '''
+    print(calculadora_chaves_RSA(443087106808546479101, 74603226601634135126749))
