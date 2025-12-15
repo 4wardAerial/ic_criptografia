@@ -1,5 +1,4 @@
 from time import sleep
-from pathlib import Path
 
 import os
 
@@ -50,7 +49,7 @@ def tipo_de_cripto() -> int:
     print("2) ElGamal")
     sleep(0.3)
     print("3) Polinomial")
-    sleep(0.7)
+    sleep(0.5)
     return escolha_opcoes((1, 2, 3))
 
 def opcoes_RSA() -> int:
@@ -68,10 +67,8 @@ def opcoes_RSA() -> int:
 
 # fazer
 def listar_nomes():
-    DIR = Path(__file__).resolve().parent
-    outros_csv = DIR / "arquivos" / "dados_outros.csv"
-    with outros_csv.open(encoding="utf-8") as docsv:
-        pass
+    
+    pass
 
 # fazer
 def RSA_cripto():
@@ -90,11 +87,9 @@ def RSA_decripto() -> tuple:
     print("---------------------")
     sleep(0.5)
     print("\nInsira a mensagem cifrada:")
-    sleep(0.5)
     cyph = input("> ")
     sleep(0.5)
     print("\nInsira sua chave privada:")
-    sleep(0.5)
     cpriv_d = int(input("> "))
     return (cyph, cpriv_d)
 
@@ -120,7 +115,7 @@ def print_chaves(p: int, q: int, n: int, e: int, d: int):
     print("\nA chave privada gerada foi:")
     sleep(0.5)
     print(d)
-    sleep(0.5)
+    sleep(0.7)
 
 def atualiza_chaves():
     print("\nSua chave pública foi atualizada no sistema! Ela pode ser encontrada em:")
@@ -128,7 +123,7 @@ def atualiza_chaves():
     print("~\\arquivos\\dados_usuario.txt")
     sleep(0.5)
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
-    sleep(0.5)
+    sleep(0.7)
 
 def add_chaves():
     cls()
