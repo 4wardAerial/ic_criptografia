@@ -86,7 +86,7 @@ def ler_mensagem(repete: bool) -> str:
     msg = input("> ")
     return msg
 
-def RSA_cripto(outros_dict: dict) -> tuple:
+def RSA_cripto_msg(outros_dict: dict) -> tuple:
     cls()
     print("\nCriptografia RSA")
     print("---------------------")
@@ -101,7 +101,18 @@ def print_criptografada(partes_cripto: list[int]):
     print("\nA mensagem criptografada é:")
     print(*partes_cripto, sep=' ')
 
-def RSA_decripto() -> tuple:
+def RSA_cripto_arq(outros_dict: dict) -> tuple:
+    cls()
+    print("\nCriptografia RSA de Arquivo")
+    print("---------------------")
+    sleep(0.5)
+    print("\nPara quem você quer enviar o arquivo?")
+    sleep(0.5)
+    listar_nomes(outros_dict.keys())
+    nome = escolha_nomes(outros_dict)
+    return (int(outros_dict[nome][0]), int(outros_dict[nome][1]))
+
+def RSA_decripto_msg() -> tuple:
     cls()
     print("\nDecriptografia RSA")
     print("---------------------")
@@ -145,9 +156,17 @@ def atualiza_chaves():
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
     sleep(0.7)
 
-def add_chaves():
-    cls()
-    print("\nAdicionar chaves RSA")
-    print("---------------------")
+def arq_criptografado():
+    print("\nSeu arquivo foi criptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
+    print("~\\arquivos\\cyph.txt")
+    sleep(0.7)
+    
+def arq_inexistente():
+    print("\nO arquivo de mensagem não foi encontrado.")
+    sleep(1)
+    print("Certifique-se que há um arquivo de nome \"msg.txt\" no diretório:")
+    sleep(0.3)
+    print("~\\arquivos")
+    sleep(0.7)
 

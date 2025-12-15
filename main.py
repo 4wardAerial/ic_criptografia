@@ -24,19 +24,19 @@ if __name__ == "__main__":
                 cpub_n = int(dutxt.readline())  # Lê a chave pública n do arquivo do usuário
                 cpub_e = int(dutxt.readline())  # Lê a chave pública e do arquivo do usuário
 
-            if opc_rsa == 1:  # Criptografar msg
-                DIR = Path(__file__).resolve().parent
-                outros_txt = DIR / "arquivos" / "dados_outros.txt"
-                outros_dict: dict = {}
-                # Abre o arquivo das chaves públicas para transformá-lo num dicionário
-                with outros_txt.open('r', encoding="utf-8") as outxt:
-                    leitor = outxt.readlines()
-                    # Cria dicionário a partir do arquivo
-                    for linha in leitor:
-                        nome, n, e = linha.split()
-                        outros_dict[nome] = (n, e)
-                cout_n, cout_e = inter.RSA_cripto(outros_dict)
+            DIR = Path(__file__).resolve().parent
+            outros_txt = DIR / "arquivos" / "dados_outros.txt"
+            outros_dict: dict = {}
+            # Abre o arquivo das chaves públicas para transformá-lo num dicionário
+            with outros_txt.open('r', encoding="utf-8") as outxt:
+                outros_lista: list[str] = outxt.readlines()
+                # Cria dicionário a partir do arquivo
+                for linha in outros_lista:
+                    nome, n, e = linha.split()
+                    outros_dict[nome] = (n, e)
 
+            if opc_rsa == 1:  # Criptografar msg
+                cout_n, cout_e = inter.RSA_cripto_msg(outros_dict)
                 repete: bool = False
                 while True:
                     try:
@@ -44,17 +44,47 @@ if __name__ == "__main__":
                         partes_decimal: list[int] = cvm.converter_para_decimal(msg, cout_n)
                         break
                     except CharInvalidoError as err:
-                        print(f"Caractere inválido {err.char}. Tente novamente.")
+                        print(f"Caractere inválido '{err.char}'. Tente novamente.")
                         repete = True
 
                 partes_cripto: list[int] = cpt.RSA_cripto(partes_decimal, cout_n, cout_e)
                 inter.print_criptografada(partes_cripto)
 
             elif opc_rsa == 2:  # Criptografar arq
-                pass
+                DIR = Path(__file__).resolve().parent
+                msg_txt = DIR / "arquivos" / "msg.txt"
 
+                DIR = Path(__file__).resolve().parent
+                cyph_txt = DIR / "arquivos" / "cyph.txt"
+
+                if not msg_txt.exists():
+                    inter.arq_inexistente()
+                else:
+                    cout_n, cout_e = inter.RSA_cripto_arq(outros_dict)
+                    with msg_txt.open('r', encoding="utf-8") as mtxt:
+                        msg_lista: list[str] = mtxt.read().splitlines()
+                    with cyph_txt.open('w', encoding="utf-8") as ctxt:
+                        falhou: bool = False
+                        partes_decimal_lista: list = []
+                        for i in range(len(msg_lista)):
+                            try:
+                                partes_decimal_lista.append(cvm.converter_para_decimal(msg_lista[i], cout_n))  
+                            except CharInvalidoError as err:
+                                print(f"\nCaractere inválido '{err.char}' na linha {i + 1}.")
+                                sleep(0.3)
+                                print("Remova-o do arquivo e tente novamente.")
+                                sleep(0.7)
+                                falhou = True
+                                break
+                        if not falhou:
+                            for j in range(len(partes_decimal_lista)):
+                                cyph_linha = cvm.lista_int_para_string(cpt.RSA_cripto(partes_decimal_lista[j], cout_n, cout_e))
+                                ctxt.write(cyph_linha)
+                                ctxt.write('\n')
+                            inter.arq_criptografado()
+                        
             elif opc_rsa == 3:  # Descriptografar msg
-                cyph, cpriv_d = inter.RSA_decripto()  # Lê a mensagem criptografada e a chave privada
+                cyph, cpriv_d = inter.RSA_decripto_msg()  # Lê a mensagem criptografada e a chave privada
                 partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
                 partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
                 msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível

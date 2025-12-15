@@ -86,6 +86,13 @@ def converter_para_string(partes_decimal: list[int]) -> str:
 '''
 Transforma uma string de números separados por espaços em uma lista de inteiros
 '''
-def string_para_lista_int(msg:str) -> list[int]:
+def string_para_lista_int(msg: str) -> list[int]:
     partes_int = [int(m) for m in msg.split()]
     return partes_int
+
+
+def lista_int_para_string(lista: list[int]) -> str:
+    msg = ""
+    for i in lista:
+        msg += str(i) + ' '
+    return msg
