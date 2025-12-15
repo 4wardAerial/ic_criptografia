@@ -85,10 +85,15 @@ if __name__ == "__main__":
                         
             elif opc_rsa == 3:  # Descriptografar msg
                 cyph, cpriv_d = inter.RSA_decripto_msg()  # Lê a mensagem criptografada e a chave privada
-                partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
-                partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
-                msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
-                inter.print_decriptografada(msg)
+                try:
+                    partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
+                    partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
+                    msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
+                    inter.print_decriptografada(msg)
+                except ValueError as err:
+                    print("\nO decriptografador espera mensagens com apenas algarismos decimais.")
+                    print("Tente novamente.")
+                    sleep(0.7)
 
             elif opc_rsa == 4:  # Descriptografar arq
                 DIR = Path(__file__).resolve().parent

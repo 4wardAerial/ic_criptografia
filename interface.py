@@ -9,11 +9,11 @@ def cls():
 def escolha_opcoes(opcoes: tuple) -> int:
     print("\nDigite o número correspondente a sua escolha:")
     while(True):
-        escolha = int(input("> "))
-        if escolha == '' or escolha not in opcoes:
+        escolha = input("> ")
+        if escolha == '' or int(escolha) not in opcoes:
             print("Selecione uma opção válida.")
         else:
-            return escolha
+            return int(escolha)
     
 def escolha_nomes(outros_dict: dict) -> str:
     print("\nDigite o nome da pessoa com quem quer conversar:")
