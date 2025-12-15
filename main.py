@@ -141,19 +141,11 @@ if __name__ == "__main__":
                 sleep(0.7)
                 inter.atualiza_chaves()
 
-        '''
         elif tipo_c == 2:  # ElGamal
-            if c_ou_d == 1:
-                pass
-            elif c_ou_d == 2:
-                pass
+            print("\nNão implementado")
 
         elif tipo_c == 3:  # Polinomial
-            if c_ou_d == 1:
-                pass
-            elif c_ou_d == 2:
-                pass
-        '''
+            print("\nNão implementado")
         
         sleep(1)
         rep: int = inter.repetir()
