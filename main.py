@@ -1,7 +1,6 @@
 from time import sleep
 from pathlib import Path
 from random import randrange
-from csv import reader
 
 from erros import CharInvalidoError
 import interface as inter
@@ -27,14 +26,14 @@ if __name__ == "__main__":
 
             if opc_rsa == 1:  # Criptografar msg
                 DIR = Path(__file__).resolve().parent
-                outros_csv = DIR / "arquivos" / "dados_outros.csv"
+                outros_txt = DIR / "arquivos" / "dados_outros.txt"
                 outros_dict: dict = {}
                 # Abre o arquivo das chaves públicas para transformá-lo num dicionário
-                with outros_csv.open('r', encoding="utf-8") as ocsv:
-                    leitor = reader(ocsv, delimiter=',')
-                    next(leitor)  # Pula cabeçalho
+                with outros_txt.open('r', encoding="utf-8") as outxt:
+                    leitor = outxt.readlines()
                     # Cria dicionário a partir do arquivo
-                    for nome, n, e in leitor:
+                    for linha in leitor:
+                        nome, n, e = linha.split()
                         outros_dict[nome] = (n, e)
                 cout_n, cout_e = inter.RSA_cripto(outros_dict)
 
@@ -51,20 +50,25 @@ if __name__ == "__main__":
                 partes_cripto: list[int] = cpt.RSA_cripto(partes_decimal, cout_n, cout_e)
                 inter.print_criptografada(partes_cripto)
 
+            elif opc_rsa == 2:  # Criptografar arq
+                pass
 
-            elif opc_rsa == 2:  # Descriptografar msg
+            elif opc_rsa == 3:  # Descriptografar msg
                 cyph, cpriv_d = inter.RSA_decripto()  # Lê a mensagem criptografada e a chave privada
                 partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
                 partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
                 msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
                 inter.print_decriptografada(msg)
 
-            elif opc_rsa == 3:  # Criar chaves
+            elif opc_rsa == 4:  # Descriptografar arq
+                pass
+
+            elif opc_rsa == 5:  # Criar chaves
                 inter.criar_chaves()
                 # Abre o arquivo de primos para escolher 2 entre eles
                 DIR = Path(__file__).resolve().parent
                 primos_txt = DIR / "arquivos" / "primos.txt"
-                with primos_txt.open(encoding="utf-8") as ptxt:
+                with primos_txt.open('r', encoding="utf-8") as ptxt:
                     primos = ptxt.readlines()
                     total_primos = len(primos)
                     p = int(primos[randrange(0, total_primos, 2)])  # Lê número primo de linha par aleatória
@@ -80,10 +84,6 @@ if __name__ == "__main__":
                     dutxt.write(cpub)
                 sleep(1)
                 inter.atualiza_chaves()
-
-            elif opc_rsa == 4:  # Add chaves
-                pass
-
 
         '''
         elif tipo_c == 2:  # ElGamal

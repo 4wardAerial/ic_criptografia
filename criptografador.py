@@ -21,15 +21,4 @@ def calculadora_chaves_RSA(p: int, q: int):
     return n, e, d
 
 if __name__ == "__main__":
-    '''
-    n, e, d = calculadora_chaves_RSA(p, q)
-    print(f"{n} {e} {d}")
-
-    msg_teste = "Ola! Essa eh uma mensagem de teste."
-    partes_decimal = cm.converter_para_decimal(msg_teste, n)
-    print(partes_decimal)
-
-    partes_cripto = RSA_cripto(partes_decimal, n, e)
-    print(*partes_cripto, sep=' ')
-    '''
     print(calculadora_chaves_RSA(9167720013620060891, 12192536085444167230027))
