@@ -14,8 +14,14 @@ def escolha_opcoes(opcoes: tuple) -> int:
         else:
             return escolha
     
-def escolha_nomes():
-    pass
+def escolha_nomes(outros_dict: dict) -> str:
+    print("\nDigite o nome da pessoa com quem quer conversar:")
+    while(True):
+        nome = input("> ")
+        if nome not in outros_dict:
+            print("Escolha uma pessoa que está na lista.")
+        else:
+            return nome
 
 def inicio():
     cls()
@@ -37,7 +43,6 @@ def voltar():
     print("\n---------------------")
     
 def sair():
-    sleep(1)
     print("\nObrigad@ por usar o sistema.")
     print("---------------------")
 
@@ -65,21 +70,21 @@ def opcoes_RSA() -> int:
     sleep(0.5)
     return escolha_opcoes((1, 2, 3, 4))
 
-# fazer
-def listar_nomes():
-    
-    pass
+def listar_nomes(lista_nomes):
+    print()
+    for nome in lista_nomes:
+        sleep(0.3)
+        print(f"- {nome}")
 
-# fazer
-def RSA_cripto():
+def RSA_cripto(outros_dict: dict):
     cls()
     print("\nCriptografia RSA")
     print("---------------------")
     sleep(0.5)
     print("Para quem você quer enviar uma mensagem?")
-    listar_nomes()
     sleep(0.5)
-    return escolha_nomes()
+    listar_nomes(outros_dict.keys())
+    return escolha_nomes(outros_dict)
 
 def RSA_decripto() -> tuple:
     cls()

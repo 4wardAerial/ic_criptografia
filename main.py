@@ -1,6 +1,7 @@
 from time import sleep
 from pathlib import Path
 from random import randrange
+from csv import reader
 
 import interface as inter
 import criptografador as cpt
@@ -24,7 +25,18 @@ if __name__ == "__main__":
                 cpub_e = int(dutxt.readline())  # Lê a chave pública e do arquivo do usuário
 
             if opc_rsa == 1:  # Criptografar msg
-                inter.RSA_cripto()
+                DIR = Path(__file__).resolve().parent
+                outros_csv = DIR / "arquivos" / "dados_outros.csv"
+                outros_dict: dict = {}
+                # Abre o arquivo das chaves públicas para transformá-lo num dicionário
+                with outros_csv.open('r', encoding="utf-8") as ocsv:
+                    leitor = reader(ocsv, delimiter=',')
+                    next(leitor)  # Pula cabeçalho
+                    # Cria dicionário a partir do arquivo
+                    for nome, n, e in leitor:
+                        outros_dict[nome] = (n, e)
+                inter.RSA_cripto(outros_dict)
+                    
 
             elif opc_rsa == 2:  # Descriptografar msg
                 cyph, cpriv_d = inter.RSA_decripto()  # Lê a mensagem criptografada e a chave privada
@@ -73,7 +85,9 @@ if __name__ == "__main__":
                 pass
         '''
         
+        sleep(1)
         rep: int = inter.repetir()
+        sleep(1)
         if rep == 1:
             inter.voltar()
             continue
