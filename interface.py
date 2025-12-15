@@ -24,14 +24,13 @@ def inicio():
     print("---------------------")
 
 def repetir() -> int:
-    sleep(0.7)
     print("\n---------------------")
     print("Deseja continuar no sistema?")
-    sleep(0.7)
+    sleep(0.5)
     print("1) Sim")
-    sleep(0.5)
+    sleep(0.3)
     print("2) Não")
-    sleep(0.5)
+    sleep(0.3)
     return escolha_opcoes((1, 2))
 
 def voltar():
@@ -45,26 +44,26 @@ def sair():
 
 def tipo_de_cripto() -> int:
     print("\nQual sistema criptográfico deseja utilizar?")
-    sleep(0.7)
+    sleep(0.5)
     print("1) RSA")
-    sleep(0.5)
+    sleep(0.3)
     print("2) ElGamal")
-    sleep(0.5)
+    sleep(0.3)
     print("3) Polinomial")
     sleep(0.7)
     return escolha_opcoes((1, 2, 3))
 
 def opcoes_RSA() -> int:
     print("\nO que você deseja fazer?")
-    sleep(0.7)
+    sleep(0.5)
     print("1) Criptografar mensagem")
-    sleep(0.5)
+    sleep(0.3)
     print("2) Descriptografar mensagem")
-    sleep(0.5)
+    sleep(0.3)
     print("3) Criar chaves")
-    sleep(0.5)
+    sleep(0.3)
     print("4) Adicionar chaves de destinatário")
-    sleep(0.7)
+    sleep(0.5)
     return escolha_opcoes((1, 2, 3, 4))
 
 # fazer
@@ -79,23 +78,23 @@ def RSA_cripto():
     cls()
     print("\nCriptografia RSA")
     print("---------------------")
-    sleep(0.7)
+    sleep(0.5)
     print("Para quem você quer enviar uma mensagem?")
     listar_nomes()
-    sleep(0.7)
+    sleep(0.5)
     return escolha_nomes()
 
 def RSA_decripto() -> tuple:
     cls()
     print("\nDecriptografia RSA")
     print("---------------------")
-    sleep(0.7)
+    sleep(0.5)
     print("\nInsira a mensagem cifrada:")
-    sleep(0.7)
+    sleep(0.5)
     cyph = input("> ")
-    sleep(0.7)
+    sleep(0.5)
     print("\nInsira sua chave privada:")
-    sleep(0.7)
+    sleep(0.5)
     cpriv_d = int(input("> "))
     return (cyph, cpriv_d)
 
@@ -107,7 +106,7 @@ def criar_chaves():
     cls()
     print("\nCriar chaves RSA")
     print("---------------------")
-    sleep(0.7)
+    sleep(0.5)
 
 def print_chaves(p: int, q: int, n: int, e: int, d: int):
     print("\nOs primos escolhidos foram:")
@@ -121,11 +120,19 @@ def print_chaves(p: int, q: int, n: int, e: int, d: int):
     print("\nA chave privada gerada foi:")
     sleep(0.5)
     print(d)
-    sleep(0.7)
+    sleep(0.5)
+
+def atualiza_chaves():
+    print("\nSua chave pública foi atualizada no sistema! Ela pode ser encontrada em:")
+    sleep(0.5)
+    print("~\\arquivos\\dados_usuario.txt")
+    sleep(0.5)
+    print("Sua chave privada não será salva! Guarde-a em um local seguro.")
+    sleep(0.5)
 
 def add_chaves():
     cls()
     print("\nAdicionar chaves RSA")
     print("---------------------")
-    sleep(0.7)
+    sleep(0.5)
 

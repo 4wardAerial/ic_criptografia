@@ -19,9 +19,9 @@ if __name__ == "__main__":
             # Abre o arquivo do usuário para carregar suas chaves públicas
             DIR = Path(__file__).resolve().parent
             usuario_txt = DIR / "arquivos" / "dados_usuario.txt"
-            with usuario_txt.open(encoding="utf-8") as dutxt:
-                cpub_n = int(dutxt.readlines()[0])  # Lê a chave pública n do arquivo do usuário
-                cpub_e = int(dutxt.readlines()[1])  # Lê a chave pública e do arquivo do usuário
+            with usuario_txt.open('r', encoding="utf-8") as dutxt:
+                cpub_n = int(dutxt.readline())  # Lê a chave pública n do arquivo do usuário
+                cpub_e = int(dutxt.readline())  # Lê a chave pública e do arquivo do usuário
 
             if opc_rsa == 1:  # Criptografar msg
                 inter.RSA_cripto()
@@ -49,6 +49,11 @@ if __name__ == "__main__":
                 # Salva as novas chaves públicas no arquivo do usuário
                 DIR = Path(__file__).resolve().parent
                 usuario_txt = DIR / "arquivos" / "dados_usuario.txt"
+                with usuario_txt.open('w', encoding="utf-8") as dutxt:
+                    cpub: str = f"{n}\n{e}"
+                    dutxt.write(cpub)
+                sleep(1)
+                inter.atualiza_chaves()
 
             elif opc_rsa == 4:  # Add chaves
                 pass

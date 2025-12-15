@@ -1,4 +1,4 @@
-import random
+from random import randrange
 
 '''
 Calcula o MDC entre dois números pelo método de euclides das divisões
@@ -29,6 +29,6 @@ def escolha_e(phi: int) -> int:
         return e
     # Se aquele e não funcionar, escolhe outro não tão grande
     while True:
-        e = random.randrange(3, 2**32, 2)
+        e = randrange(3, 2**32, 2)
         if alg_euclides_extendido(e, phi)[0] == 1:
             return e

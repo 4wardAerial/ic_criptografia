@@ -80,10 +80,9 @@ def converter_para_string(partes_decimal: list[int]) -> str:
 
     return string
 
+'''
+Transforma uma string de números separados por espaços em uma lista de inteiros
+'''
 def string_para_lista_int(msg:str) -> list[int]:
     partes_int = [int(m) for m in msg.split()]
     return partes_int
-
-if __name__ == "__main__":
-    msg_teste = "Mensagem de teste"
-    print(converter_para_string(converter_para_decimal(msg_teste, 100)))

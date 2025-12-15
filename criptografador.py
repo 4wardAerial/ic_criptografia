@@ -1,7 +1,3 @@
-import random
-from pathlib import Path
-
-import conversor_msg as cm
 from funcoes import alg_euclides_extendido, escolha_e
 
 def RSA_cripto(partes_decimal: list[int], cpub_n: int, cpub_e: int) -> list[int]:
@@ -26,14 +22,6 @@ def calculadora_chaves_RSA(p: int, q: int):
 
 if __name__ == "__main__":
     '''
-    DIR = Path(__file__).resolve().parent
-    primos_txt = DIR / "arquivos" / "primos.txt"
-    with primos_txt.open(encoding="utf-8") as ptxt:
-        primos = ptxt.readlines()
-        total_primos = len(primos)
-        p = int(primos[random.randrange(0, total_primos, 2)])
-        q = int(primos[random.randrange(1, total_primos, 2)])
-
     n, e, d = calculadora_chaves_RSA(p, q)
     print(f"{n} {e} {d}")
 
@@ -43,10 +31,4 @@ if __name__ == "__main__":
 
     partes_cripto = RSA_cripto(partes_decimal, n, e)
     print(*partes_cripto, sep=' ')
-
-    partes_decripto = RSA_decripto(partes_cripto, d, n)
-    print(partes_decripto)
-
-    print(cm.converter_para_string(partes_decripto))
     '''
-    print(calculadora_chaves_RSA(443087106808546479101, 74603226601634135126749))
