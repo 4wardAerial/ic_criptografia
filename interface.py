@@ -10,7 +10,7 @@ def escolha_opcoes(opcoes: tuple) -> int:
     print("\nDigite o número correspondente a sua escolha:")
     while(True):
         escolha = int(input("> "))
-        if escolha not in opcoes:
+        if escolha == '' or escolha not in opcoes:
             print("Selecione uma opção válida.")
         else:
             return escolha
