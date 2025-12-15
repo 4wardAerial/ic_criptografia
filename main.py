@@ -3,13 +3,14 @@ from pathlib import Path
 from random import randrange
 from csv import reader
 
+from erros import CharInvalidoError
 import interface as inter
 import criptografador as cpt
 import conversor_msg as cvm
 
 if __name__ == "__main__":
     inter.inicio()
-    sleep(2)
+    sleep(1)
 
     while(True):
         tipo_c: int = inter.tipo_de_cripto()
@@ -35,8 +36,21 @@ if __name__ == "__main__":
                     # Cria dicionário a partir do arquivo
                     for nome, n, e in leitor:
                         outros_dict[nome] = (n, e)
-                inter.RSA_cripto(outros_dict)
-                    
+                cout_n, cout_e = inter.RSA_cripto(outros_dict)
+
+                repete: bool = False
+                while True:
+                    try:
+                        msg: str = inter.ler_mensagem(repete)
+                        partes_decimal: list[int] = cvm.converter_para_decimal(msg, cout_n)
+                        break
+                    except CharInvalidoError as err:
+                        print(f"Caractere inválido {err.char}. Tente novamente.")
+                        repete = True
+
+                partes_cripto: list[int] = cpt.RSA_cripto(partes_decimal, cout_n, cout_e)
+                inter.print_criptografada(partes_cripto)
+
 
             elif opc_rsa == 2:  # Descriptografar msg
                 cyph, cpriv_d = inter.RSA_decripto()  # Lê a mensagem criptografada e a chave privada

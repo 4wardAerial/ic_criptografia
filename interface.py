@@ -1,6 +1,7 @@
 from time import sleep
-
 import os
+
+from conversor_msg import tabela_char
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -75,16 +76,28 @@ def listar_nomes(lista_nomes):
     for nome in lista_nomes:
         sleep(0.3)
         print(f"- {nome}")
+    sleep(0.5)
 
-def RSA_cripto(outros_dict: dict):
+def ler_mensagem(repete: bool) -> str:
+    if not repete:
+        print("\nInsira sua mensagem:")
+    msg = input("> ")
+    return msg
+
+def RSA_cripto(outros_dict: dict) -> tuple:
     cls()
     print("\nCriptografia RSA")
     print("---------------------")
     sleep(0.5)
-    print("Para quem você quer enviar uma mensagem?")
+    print("\nPara quem você quer enviar uma mensagem?")
     sleep(0.5)
     listar_nomes(outros_dict.keys())
-    return escolha_nomes(outros_dict)
+    nome = escolha_nomes(outros_dict)
+    return (int(outros_dict[nome][0]), int(outros_dict[nome][1]))
+
+def print_criptografada(partes_cripto: list[int]):
+    print("\nA mensagem criptografada é:")
+    print(*partes_cripto, sep=' ')
 
 def RSA_decripto() -> tuple:
     cls()

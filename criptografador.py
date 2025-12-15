@@ -32,3 +32,4 @@ if __name__ == "__main__":
     partes_cripto = RSA_cripto(partes_decimal, n, e)
     print(*partes_cripto, sep=' ')
     '''
+    print(calculadora_chaves_RSA(9167720013620060891, 12192536085444167230027))
