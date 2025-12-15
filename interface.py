@@ -128,6 +128,15 @@ def print_decriptografada(msg: str):
     print("\nA mensagem decriptografada é:")
     print(msg)
 
+def RSA_decripto_arq() -> int:
+    cls()
+    print("\nDecriptografia RSA de Arquivo")
+    print("---------------------")
+    sleep(0.5)
+    print("\nInsira sua chave privada:")
+    cpriv_d = int(input("> "))
+    return cpriv_d
+
 def criar_chaves():
     cls()
     print("\nCriar chaves RSA")
@@ -161,11 +170,17 @@ def arq_criptografado():
     sleep(0.5)
     print("~\\arquivos\\cyph.txt")
     sleep(0.7)
-    
-def arq_inexistente():
-    print("\nO arquivo de mensagem não foi encontrado.")
+
+def arq_decriptografado():
+    print("\nSeu arquivo foi decriptografado com sucesso! Ele pode ser encontrado em:")
+    sleep(0.5)
+    print("~\\arquivos\\msg.txt")
+    sleep(0.7)
+
+def arq_inexistente(nome: str):
+    print("\nO arquivo necessário não foi encontrado.")
     sleep(1)
-    print("Certifique-se que há um arquivo de nome \"msg.txt\" no diretório:")
+    print(f"Certifique-se que há um arquivo de nome \"{nome}.txt\" no diretório:")
     sleep(0.3)
     print("~\\arquivos")
     sleep(0.7)

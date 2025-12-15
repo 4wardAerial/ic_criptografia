@@ -58,7 +58,7 @@ if __name__ == "__main__":
                 cyph_txt = DIR / "arquivos" / "cyph.txt"
 
                 if not msg_txt.exists():
-                    inter.arq_inexistente()
+                    inter.arq_inexistente("msg")
                 else:
                     cout_n, cout_e = inter.RSA_cripto_arq(outros_dict)
                     with msg_txt.open('r', encoding="utf-8") as mtxt:
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                                 break
                         if not falhou:
                             for j in range(len(partes_decimal_lista)):
-                                cyph_linha = cvm.lista_int_para_string(cpt.RSA_cripto(partes_decimal_lista[j], cout_n, cout_e))
+                                cyph_linha: str = cvm.lista_int_para_string(cpt.RSA_cripto(partes_decimal_lista[j], cout_n, cout_e))
                                 ctxt.write(cyph_linha)
                                 ctxt.write('\n')
                             inter.arq_criptografado()
@@ -91,7 +91,28 @@ if __name__ == "__main__":
                 inter.print_decriptografada(msg)
 
             elif opc_rsa == 4:  # Descriptografar arq
-                pass
+                DIR = Path(__file__).resolve().parent
+                cyph_txt = DIR / "arquivos" / "cyph.txt"
+
+                DIR = Path(__file__).resolve().parent
+                msg_txt = DIR / "arquivos" / "msg.txt"
+
+                if not cyph_txt.exists():
+                    inter.arq_inexistente("cyph")
+                else:
+                    cpriv_d = inter.RSA_decripto_arq()
+                    with cyph_txt.open('r', encoding="utf-8") as ctxt:
+                        cyph_lista: list[str] = ctxt.read().splitlines()
+                    with msg_txt.open('w', encoding="utf-8") as mtxt:
+                        partes_cripto_lista: list = []
+                        for i in range(len(cyph_lista)):
+                            partes_cripto_lista.append(cvm.string_para_lista_int(cyph_lista[i]))
+                        for j in range(len(partes_cripto_lista)):
+                            msg_linha_lista: list[int] = cpt.RSA_decripto(partes_cripto_lista[j], cpriv_d, cpub_n)
+                            msg_linha: str = cvm.converter_para_string(msg_linha_lista)
+                            mtxt.write(msg_linha)
+                            mtxt.write('\n')
+                    inter.arq_decriptografado()
 
             elif opc_rsa == 5:  # Criar chaves
                 inter.criar_chaves()
@@ -112,7 +133,7 @@ if __name__ == "__main__":
                 with usuario_txt.open('w', encoding="utf-8") as dutxt:
                     cpub: str = f"{n}\n{e}"
                     dutxt.write(cpub)
-                sleep(1)
+                sleep(0.7)
                 inter.atualiza_chaves()
 
         '''
