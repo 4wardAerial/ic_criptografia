@@ -54,22 +54,27 @@ def tipo_de_cripto() -> int:
     sleep(0.7)
     return escolha_opcoes((1, 2, 3))
 
-def critpo_ou_decripto() -> int:
-    print("\nO que você deseja fazer com sua mensagem?")
+def opcoes_RSA() -> int:
+    print("\nO que você deseja fazer?")
     sleep(0.7)
-    print("1) Criptografá-la")
+    print("1) Criptografar mensagem")
     sleep(0.5)
-    print("2) Descriptografá-la")
+    print("2) Descriptografar mensagem")
+    sleep(0.5)
+    print("3) Criar chaves")
+    sleep(0.5)
+    print("4) Adicionar chaves de destinatário")
     sleep(0.7)
-    return escolha_opcoes((1, 2))
+    return escolha_opcoes((1, 2, 3, 4))
 
+# fazer
 def listar_nomes():
     DIR = Path(__file__).resolve().parent
     outros_csv = DIR / "arquivos" / "dados_outros.csv"
     with outros_csv.open(encoding="utf-8") as docsv:
         pass
 
-
+# fazer
 def RSA_cripto():
     cls()
     print("\nCriptografia RSA")
@@ -97,4 +102,30 @@ def RSA_decripto() -> tuple:
 def print_decriptografada(msg: str):
     print("\nA mensagem decriptografada é:")
     print(msg)
+
+def criar_chaves():
+    cls()
+    print("\nCriar chaves RSA")
+    print("---------------------")
+    sleep(0.7)
+
+def print_chaves(p: int, q: int, n: int, e: int, d: int):
+    print("\nOs primos escolhidos foram:")
+    sleep(0.5)
+    print(f"{p} e {q}")
+    sleep(0.5)
+    print("\nO par de chaves públicas gerada foi:")
+    sleep(0.5)
+    print(f"{n} e {e}")
+    sleep(0.5)
+    print("\nA chave privada gerada foi:")
+    sleep(0.5)
+    print(d)
+    sleep(0.7)
+
+def add_chaves():
+    cls()
+    print("\nAdicionar chaves RSA")
+    print("---------------------")
+    sleep(0.7)
 
