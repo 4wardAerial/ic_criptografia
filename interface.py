@@ -10,7 +10,7 @@ def escolha_opcoes(opcoes: tuple) -> int:
     print("\nDigite o número correspondente a sua escolha:")
     while(True):
         escolha = input("> ")
-        if escolha == '' or int(escolha) not in opcoes:
+        if escolha not in opcoes:
             print("Selecione uma opção válida.")
         else:
             return int(escolha)
@@ -37,7 +37,7 @@ def repetir() -> int:
     sleep(0.3)
     print("2) Não")
     sleep(0.3)
-    return escolha_opcoes((1, 2))
+    return escolha_opcoes(('1', '2'))
 
 def voltar():
     cls()
@@ -58,7 +58,7 @@ def tipo_de_cripto() -> int:
     sleep(0.3)
     print("\n0) Sair")
     sleep(0.5)
-    return escolha_opcoes((0, 1, 2, 3))
+    return escolha_opcoes(('0', '1', '2', '3'))
 
 def opcoes_RSA() -> int:
     cls()
@@ -81,7 +81,7 @@ def opcoes_RSA() -> int:
     sleep(0.5)
     print("\n0) Voltar")
     sleep(0.5)
-    return escolha_opcoes((0, 1, 2, 3, 4, 5, 6))
+    return escolha_opcoes(('0', '1', '2', '3', '4', '5', '6'))
 
 def listar_nomes(lista_nomes):
     print()
