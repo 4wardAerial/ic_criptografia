@@ -133,25 +133,7 @@ if __name__ == "__main__":
                                 mtxt.write('\n')
                         inter.arq_decriptografado()
 
-                elif opc_rsa == 5:  # Criar chaves
-                    inter.criar_chaves()
-                    # Abre o arquivo de primos para escolher 2 entre eles
-                    with primos_txt.open('r', encoding="utf-8") as ptxt:
-                        primos = ptxt.readlines()
-                        total_primos = len(primos)
-                        p = int(primos[randrange(0, total_primos, 2)])  # Lê número primo de linha par aleatória
-                        q = int(primos[randrange(1, total_primos, 2)])  # Lê número primo de linha ímpar aleatória
-
-                    n, e, d = cpt.calculadora_chaves_RSA(p, q)
-                    inter.print_chaves(p, q, n, e, d)
-                    # Salva as novas chaves públicas no arquivo do usuário
-                    with usuario_txt.open('w', encoding="utf-8") as dutxt:
-                        cpub: str = f"{n}\n{e}"
-                        dutxt.write(cpub)
-                    sleep(0.7)
-                    inter.atualiza_chaves()
-
-                elif opc_rsa == 6:  # Gerenciar chaves
+                elif opc_rsa == 5:  # Gerenciar chaves
                     nome = inter.add_chaves_nome()
 
                     repete: bool = False
@@ -189,6 +171,25 @@ if __name__ == "__main__":
                     # Reabre arquivo para reescrevê-lo totalmente com a lista atualizada
                     with outros_txt.open('w', encoding="utf-8") as outxt:
                         outxt.writelines(linhas)
+                    
+                elif opc_rsa == 6:  # Criar chaves
+                    inter.criar_chaves()
+                    # Abre o arquivo de primos para escolher 2 entre eles
+                    with primos_txt.open('r', encoding="utf-8") as ptxt:
+                        primos = ptxt.readlines()
+                        total_primos = len(primos)
+                        p = int(primos[randrange(0, total_primos, 2)])  # Lê número primo de linha par aleatória
+                        q = int(primos[randrange(1, total_primos, 2)])  # Lê número primo de linha ímpar aleatória
+
+                    n, e, d = cpt.calculadora_chaves_RSA(p, q)
+                    inter.print_chaves(p, q, n, e, d)
+                    # Salva as novas chaves públicas no arquivo do usuário
+                    with usuario_txt.open('w', encoding="utf-8") as dutxt:
+                        cpub: str = f"{n}\n{e}"
+                        dutxt.write(cpub)
+                    sleep(0.7)
+                    inter.atualiza_chaves()
+
 
                 sleep(1)
                 rep: int = inter.repetir()
