@@ -50,18 +50,24 @@ def sair():
 def tipo_de_cripto() -> int:
     print("\nQual sistema criptográfico deseja utilizar?")
     sleep(0.5)
-    print("1) RSA")
+    print("\n1) RSA")
     sleep(0.3)
     print("2) ElGamal")
     sleep(0.3)
     print("3) Polinomial")
+    sleep(0.3)
+    print("\n0) Sair")
     sleep(0.5)
-    return escolha_opcoes((1, 2, 3))
+    return escolha_opcoes((0, 1, 2, 3))
 
 def opcoes_RSA() -> int:
+    cls()
+    print("\nCriptografia RSA")
+    print("---------------------")
+    sleep(0.5)
     print("\nO que você deseja fazer?")
     sleep(0.5)
-    print("1) Criptografar mensagem")
+    print("\n1) Criptografar mensagem")
     sleep(0.3)
     print("2) Criptografar arquivo")
     sleep(0.3)
@@ -70,8 +76,12 @@ def opcoes_RSA() -> int:
     print("4) Descriptografar arquivo")
     sleep(0.3)
     print("5) Criar chaves")
+    sleep(0.3)
+    print("6) Adicionar chaves públicas")
     sleep(0.5)
-    return escolha_opcoes((1, 2, 3, 4, 5))
+    print("\n0) Voltar")
+    sleep(0.5)
+    return escolha_opcoes((0, 1, 2, 3, 4, 5, 6))
 
 def listar_nomes(lista_nomes):
     print()
@@ -163,6 +173,29 @@ def atualiza_chaves():
     print("~\\arquivos\\dados_usuario.txt")
     sleep(0.5)
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
+    sleep(0.7)
+
+def add_chaves() -> tuple:
+    cls()
+    print("\nAdicionar chaves públicas RSA")
+    print("---------------------")
+    sleep(0.5)
+    print("\nInsira o nome de quem quer adicionar:")
+    nome = input("> ")
+    sleep(0.5)
+    print("\nInsira a chave pública 'n' dessa pessoa:")
+    cpub_n = int(input("> "))
+    sleep(0.5)
+    print("\nInsira a chave pública 'e' dessa pessoa:")
+    cpub_e = int(input("> "))
+    sleep(0.5)
+    return (nome, cpub_n, cpub_e)
+
+def atualiza_arq(nome: str, achou: bool = False):
+    if achou:
+        print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
+    else:
+        print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
     sleep(0.7)
 
 def arq_criptografado():

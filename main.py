@@ -11,148 +11,163 @@ if __name__ == "__main__":
     inter.inicio()
     sleep(1)
 
-    while(True):
+    DIR = Path(__file__).resolve().parent
+    usuario_txt: Path = DIR / "arquivos" / "dados_usuario.txt"
+    outros_txt: Path = DIR / "arquivos" / "dados_outros.txt"
+    msg_txt: Path = DIR / "arquivos" / "msg.txt"
+    cyph_txt: Path = DIR / "arquivos" / "cyph.txt"
+    primos_txt: Path = DIR / "arquivos" / "primos.txt"
+
+    while True:
         tipo_c: int = inter.tipo_de_cripto()
         sleep(1)
 
-        if tipo_c == 1:  # RSA
-            opc_rsa: int = inter.opcoes_RSA()
-            # Abre o arquivo do usuário para carregar suas chaves públicas
-            DIR = Path(__file__).resolve().parent
-            usuario_txt = DIR / "arquivos" / "dados_usuario.txt"
-            with usuario_txt.open('r', encoding="utf-8") as dutxt:
-                cpub_n = int(dutxt.readline())  # Lê a chave pública n do arquivo do usuário
-                cpub_e = int(dutxt.readline())  # Lê a chave pública e do arquivo do usuário
-
-            DIR = Path(__file__).resolve().parent
-            outros_txt = DIR / "arquivos" / "dados_outros.txt"
-            outros_dict: dict = {}
-            # Abre o arquivo das chaves públicas para transformá-lo num dicionário
-            with outros_txt.open('r', encoding="utf-8") as outxt:
-                outros_lista: list[str] = outxt.readlines()
-                # Cria dicionário a partir do arquivo
-                for linha in outros_lista:
-                    nome, n, e = linha.split()
-                    outros_dict[nome] = (n, e)
-
-            if opc_rsa == 1:  # Criptografar msg
-                cout_n, cout_e = inter.RSA_cripto_msg(outros_dict)
-                repete: bool = False
-                while True:
-                    try:
-                        msg: str = inter.ler_mensagem(repete)
-                        partes_decimal: list[int] = cvm.converter_para_decimal(msg, cout_n)
-                        break
-                    except CharInvalidoError as err:
-                        print(f"Caractere inválido '{err.char}'. Tente novamente.")
-                        repete = True
-
-                partes_cripto: list[int] = cpt.RSA_cripto(partes_decimal, cout_n, cout_e)
-                inter.print_criptografada(partes_cripto)
-
-            elif opc_rsa == 2:  # Criptografar arq
-                DIR = Path(__file__).resolve().parent
-                msg_txt = DIR / "arquivos" / "msg.txt"
-
-                DIR = Path(__file__).resolve().parent
-                cyph_txt = DIR / "arquivos" / "cyph.txt"
-
-                if not msg_txt.exists():
-                    inter.arq_inexistente("msg")
-                else:
-                    cout_n, cout_e = inter.RSA_cripto_arq(outros_dict)
-                    with msg_txt.open('r', encoding="utf-8") as mtxt:
-                        msg_lista: list[str] = mtxt.read().splitlines()
-                    with cyph_txt.open('w', encoding="utf-8") as ctxt:
-                        falhou: bool = False
-                        partes_decimal_lista: list = []
-                        for i in range(len(msg_lista)):
-                            try:
-                                partes_decimal_lista.append(cvm.converter_para_decimal(msg_lista[i], cout_n))  
-                            except CharInvalidoError as err:
-                                print(f"\nCaractere inválido '{err.char}' na linha {i + 1}.")
-                                sleep(0.3)
-                                print("Remova-o do arquivo e tente novamente.")
-                                sleep(0.7)
-                                falhou = True
-                                break
-                        if not falhou:
-                            for j in range(len(partes_decimal_lista)):
-                                cyph_linha: str = cvm.lista_int_para_string(cpt.RSA_cripto(partes_decimal_lista[j], cout_n, cout_e))
-                                ctxt.write(cyph_linha)
-                                ctxt.write('\n')
-                            inter.arq_criptografado()
-                        
-            elif opc_rsa == 3:  # Descriptografar msg
-                cyph, cpriv_d = inter.RSA_decripto_msg()  # Lê a mensagem criptografada e a chave privada
-                try:
-                    partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
-                    partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
-                    msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
-                    inter.print_decriptografada(msg)
-                except ValueError as err:
-                    print("\nO decriptografador espera mensagens com apenas algarismos decimais.")
-                    print("Tente novamente.")
-                    sleep(0.7)
-
-            elif opc_rsa == 4:  # Descriptografar arq
-                DIR = Path(__file__).resolve().parent
-                cyph_txt = DIR / "arquivos" / "cyph.txt"
-
-                DIR = Path(__file__).resolve().parent
-                msg_txt = DIR / "arquivos" / "msg.txt"
-
-                if not cyph_txt.exists():
-                    inter.arq_inexistente("cyph")
-                else:
-                    cpriv_d = inter.RSA_decripto_arq()
-                    with cyph_txt.open('r', encoding="utf-8") as ctxt:
-                        cyph_lista: list[str] = ctxt.read().splitlines()
-                    with msg_txt.open('w', encoding="utf-8") as mtxt:
-                        partes_cripto_lista: list = []
-                        for i in range(len(cyph_lista)):
-                            partes_cripto_lista.append(cvm.string_para_lista_int(cyph_lista[i]))
-                        for j in range(len(partes_cripto_lista)):
-                            msg_linha_lista: list[int] = cpt.RSA_decripto(partes_cripto_lista[j], cpriv_d, cpub_n)
-                            msg_linha: str = cvm.converter_para_string(msg_linha_lista)
-                            mtxt.write(msg_linha)
-                            mtxt.write('\n')
-                    inter.arq_decriptografado()
-
-            elif opc_rsa == 5:  # Criar chaves
-                inter.criar_chaves()
-                # Abre o arquivo de primos para escolher 2 entre eles
-                DIR = Path(__file__).resolve().parent
-                primos_txt = DIR / "arquivos" / "primos.txt"
-                with primos_txt.open('r', encoding="utf-8") as ptxt:
-                    primos = ptxt.readlines()
-                    total_primos = len(primos)
-                    p = int(primos[randrange(0, total_primos, 2)])  # Lê número primo de linha par aleatória
-                    q = int(primos[randrange(1, total_primos, 2)])  # Lê número primo de linha ímpar aleatória
-
-                n, e, d = cpt.calculadora_chaves_RSA(p, q)
-                inter.print_chaves(p, q, n, e, d)
-                # Salva as novas chaves públicas no arquivo do usuário
-                DIR = Path(__file__).resolve().parent
-                usuario_txt = DIR / "arquivos" / "dados_usuario.txt"
-                with usuario_txt.open('w', encoding="utf-8") as dutxt:
-                    cpub: str = f"{n}\n{e}"
-                    dutxt.write(cpub)
-                sleep(0.7)
-                inter.atualiza_chaves()
-
-        elif tipo_c == 2:  # ElGamal
-            print("\nNão implementado")
-
-        elif tipo_c == 3:  # Polinomial
-            print("\nNão implementado")
-        
-        sleep(1)
-        rep: int = inter.repetir()
-        sleep(1)
-        if rep == 1:
-            inter.voltar()
-            continue
-        elif rep == 2:
+        if tipo_c == 0:  # Sair
+            sleep(1)
             inter.sair()
             break
+
+        elif tipo_c == 1:  # RSA
+            while True:
+                opc_rsa: int = inter.opcoes_RSA()
+                # Abre o arquivo do usuário para carregar suas chaves públicas
+                with usuario_txt.open('r', encoding="utf-8") as dutxt:
+                    cpub_n = int(dutxt.readline())  # Lê a chave pública n do arquivo do usuário
+                    cpub_e = int(dutxt.readline())  # Lê a chave pública e do arquivo do usuário
+
+                outros_dict: dict = {}
+                # Abre o arquivo das chaves públicas para transformá-lo num dicionário
+                with outros_txt.open('r', encoding="utf-8") as outxt:
+                    outros_lista: list[str] = outxt.readlines()
+                    # Cria dicionário a partir do arquivo
+                    for linha in outros_lista:
+                        nome, n, e = linha.split()
+                        outros_dict[nome] = (n, e)
+                
+                if opc_rsa == 0:  # Voltar
+                    inter.voltar()
+                    break
+
+                elif opc_rsa == 1:  # Criptografar msg
+                    cout_n, cout_e = inter.RSA_cripto_msg(outros_dict)
+                    repete: bool = False
+                    while True:
+                        try:
+                            msg: str = inter.ler_mensagem(repete)
+                            partes_decimal: list[int] = cvm.converter_para_decimal(msg, cout_n)
+                            break
+                        except CharInvalidoError as err:
+                            print(f"Caractere inválido '{err.char}'. Tente novamente.")
+                            repete = True
+
+                    partes_cripto: list[int] = cpt.RSA_cripto(partes_decimal, cout_n, cout_e)
+                    inter.print_criptografada(partes_cripto)
+
+                elif opc_rsa == 2:  # Criptografar arq
+                    if not msg_txt.exists():
+                        inter.arq_inexistente("msg")
+                    else:
+                        cout_n, cout_e = inter.RSA_cripto_arq(outros_dict)
+                        with msg_txt.open('r', encoding="utf-8") as mtxt:
+                            msg_lista: list[str] = mtxt.read().splitlines()
+                        with cyph_txt.open('w', encoding="utf-8") as ctxt:
+                            falhou: bool = False
+                            partes_decimal_lista: list = []
+                            for i in range(len(msg_lista)):
+                                try:
+                                    partes_decimal_lista.append(cvm.converter_para_decimal(msg_lista[i], cout_n))  
+                                except CharInvalidoError as err:
+                                    print(f"\nCaractere inválido '{err.char}' na linha {i + 1}.")
+                                    sleep(0.3)
+                                    print("Remova-o do arquivo e tente novamente.")
+                                    sleep(0.7)
+                                    falhou = True
+                                    break
+                            if not falhou:
+                                for j in range(len(partes_decimal_lista)):
+                                    cyph_linha: str = cvm.lista_int_para_string(cpt.RSA_cripto(partes_decimal_lista[j], cout_n, cout_e))
+                                    ctxt.write(cyph_linha)
+                                    ctxt.write('\n')
+                                inter.arq_criptografado()
+                            
+                elif opc_rsa == 3:  # Descriptografar msg
+                    cyph, cpriv_d = inter.RSA_decripto_msg()  # Lê a mensagem criptografada e a chave privada
+                    try:
+                        partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
+                        partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
+                        msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
+                        inter.print_decriptografada(msg)
+                    except ValueError as err:
+                        print("\nO decriptografador espera mensagens com apenas algarismos decimais.")
+                        print("Tente novamente.")
+                        sleep(0.7)
+
+                elif opc_rsa == 4:  # Descriptografar arq
+                    if not cyph_txt.exists():
+                        inter.arq_inexistente("cyph")
+                    else:
+                        cpriv_d = inter.RSA_decripto_arq()
+                        with cyph_txt.open('r', encoding="utf-8") as ctxt:
+                            cyph_lista: list[str] = ctxt.read().splitlines()
+                        with msg_txt.open('w', encoding="utf-8") as mtxt:
+                            partes_cripto_lista: list = []
+                            for i in range(len(cyph_lista)):
+                                partes_cripto_lista.append(cvm.string_para_lista_int(cyph_lista[i]))
+                            for j in range(len(partes_cripto_lista)):
+                                msg_linha_lista: list[int] = cpt.RSA_decripto(partes_cripto_lista[j], cpriv_d, cpub_n)
+                                msg_linha: str = cvm.converter_para_string(msg_linha_lista)
+                                mtxt.write(msg_linha)
+                                mtxt.write('\n')
+                        inter.arq_decriptografado()
+
+                elif opc_rsa == 5:  # Criar chaves
+                    inter.criar_chaves()
+                    # Abre o arquivo de primos para escolher 2 entre eles
+                    with primos_txt.open('r', encoding="utf-8") as ptxt:
+                        primos = ptxt.readlines()
+                        total_primos = len(primos)
+                        p = int(primos[randrange(0, total_primos, 2)])  # Lê número primo de linha par aleatória
+                        q = int(primos[randrange(1, total_primos, 2)])  # Lê número primo de linha ímpar aleatória
+
+                    n, e, d = cpt.calculadora_chaves_RSA(p, q)
+                    inter.print_chaves(p, q, n, e, d)
+                    # Salva as novas chaves públicas no arquivo do usuário
+                    with usuario_txt.open('w', encoding="utf-8") as dutxt:
+                        cpub: str = f"{n}\n{e}"
+                        dutxt.write(cpub)
+                    sleep(0.7)
+                    inter.atualiza_chaves()
+
+                elif opc_rsa == 6:  # Add chaves
+                    nome, cout_n, cout_e = inter.add_chaves()
+                    nova_linha: str = f"{nome} {cout_n} {cout_e}\n"
+                    # Abre arquivo para listar todas as linhas
+                    with outros_txt.open('r', encoding="utf-8") as outxt:
+                        linhas: list[str] = outxt.readlines()
+
+                    achou: bool = False
+                    for i, linha in enumerate(linhas):
+                        nome_ou = linha.strip().split()[0]
+                        if nome == nome_ou:
+                            linhas[i] = nova_linha  # Muda linha na lista
+                            achou = True
+                            sleep(0.7)
+                            inter.atualiza_arq(nome, achou)
+                            break
+                    if not achou:
+                        linhas.append(nova_linha)  # Adiciona linha na lista
+                        sleep(0.7)
+                        inter.atualiza_arq(nome)
+                    # Reabre arquivo para reescrevê-lo totalmente com a lista atualizada
+                    with outros_txt.open('w', encoding="utf-8") as outxt:
+                        outxt.writelines(linhas)
+
+                sleep(1)
+                rep: int = inter.repetir()
+                sleep(1)
+                if rep == 1:
+                    inter.voltar()
+                    break
+                elif rep == 2:
+                    inter.sair()
+                    
