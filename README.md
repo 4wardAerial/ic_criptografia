@@ -17,12 +17,19 @@ Para as entradas e arquivos de mensagem a serem criptografadas, essas podem cont
 #### RSA
 - **Criptografar mensagem:** Criptografa a mensagem digitada para a pessoa selecionada, usando as chaves públicas dela. A mensagem corresponde a toda sequência de números digitada, incluindo os espaços.
 
-- **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~\arquivos```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
+- **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~\arquivos\mensagens```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
 
 - **Decriptografar mensagem:** Decriptografa a mensagem digitada para o usuário, usando a sua própria chave privada. 
 
-- **Decriptografar arquivo:** Decriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~\arquivos```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
+- **Decriptografar arquivo:** Decriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
 
 - **Criar chaves:** Escolhe dois primos aleatórios (dentre os pré-listados num arquivo) e gera o par de chaves públicas (*n*, *e*) e a chave privada (*d*) para o usuário. As chaves públicas são salvas em um arquivo no sistema e passam a ser as novas chaves do usuário. A chave privada não é salva e o usuário deve salvá-la por conta própria. 
 
 - **Gerenciar chaves públicas:** Permite que o usuário adicione, remova ou mude pessoas (e suas chaves públicas) do sistema. Para adicionar uma nova, basta digitar seu nome e suas chaves. Caso essa pessoa já esteja no sistema, suas chaves públicas são atualizadas para as recém-inseridas. Para remover uma pessoa, basta digitar seu nome e inserir *0* como qualquer uma das chaves.
+
+#### ElGamal
+
+### Arquivos do progama
+- ```dados_publicos.txt```: 
+
+Não é recomendado alterar os arquivos localizado em ```~/arquivos/dados``` manualmente, visto que formatações indevidas vão causar erros no sistema. 

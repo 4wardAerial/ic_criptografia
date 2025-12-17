@@ -12,11 +12,11 @@ if __name__ == "__main__":
     sleep(1)
 
     DIR = Path(__file__).resolve().parent
-    usuario_txt: Path = DIR / "arquivos" / "dados_usuario.txt"
-    outros_txt: Path = DIR / "arquivos" / "dados_outros.txt"
-    msg_txt: Path = DIR / "arquivos" / "msg.txt"
-    cyph_txt: Path = DIR / "arquivos" / "cyph.txt"
-    primos_txt: Path = DIR / "arquivos" / "primos.txt"
+    usuario_txt: Path = DIR / "arquivos" / "dados" / "dados_usuario.txt"
+    outros_txt: Path = DIR / "arquivos" / "dados" / "dados_publicos.txt"
+    msg_txt: Path = DIR / "arquivos" / "mensagens" / "msg.txt"
+    cyph_txt: Path = DIR / "arquivos" / "mensagens" / "cyph.txt"
+    primos_txt: Path = DIR / "arquivos" / "dados" / "primos.txt"
 
     sair: bool = False
     while True:
@@ -202,4 +202,3 @@ if __name__ == "__main__":
         if sair:
             inter.sair()
             break
-                    
