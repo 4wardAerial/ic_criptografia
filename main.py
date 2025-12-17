@@ -18,6 +18,7 @@ if __name__ == "__main__":
     cyph_txt: Path = DIR / "arquivos" / "cyph.txt"
     primos_txt: Path = DIR / "arquivos" / "primos.txt"
 
+    sair: bool = False
     while True:
         tipo_c: int = inter.tipo_de_cripto()
         sleep(1)
@@ -41,7 +42,7 @@ if __name__ == "__main__":
                     outros_lista: list[str] = outxt.readlines()
                     # Cria dicionário a partir do arquivo
                     for linha in outros_lista:
-                        nome, n, e = linha.split()
+                        nome, n, e = linha.split(sep=',')
                         outros_dict[nome] = (n, e)
                 
                 if opc_rsa == 0:  # Voltar
@@ -91,16 +92,28 @@ if __name__ == "__main__":
                                 inter.arq_criptografado()
                             
                 elif opc_rsa == 3:  # Descriptografar msg
-                    cyph, cpriv_d = inter.RSA_decripto_msg()  # Lê a mensagem criptografada e a chave privada
-                    try:
-                        partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
-                        partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
-                        msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
-                        inter.print_decriptografada(msg)
-                    except ValueError as err:
-                        print("\nO decriptografador espera mensagens com apenas algarismos decimais.")
-                        print("Tente novamente.")
-                        sleep(0.7)
+                    repete: bool = False
+                    while True:
+                        try:
+                            cyph, cpriv_d = inter.RSA_decripto_msg(repete)  # Lê a mensagem criptografada e a chave privada
+                            repete = False
+                        except ValueError as err:
+                            print("\nSua chave privada deve conter apenas algarismos decimais.")
+                            print("Tente novamente.")
+                            sleep(0.7)
+                            repete = True
+                            continue
+                        try:
+                            partes_cripto: list[int] = cvm.string_para_lista_int(cyph)  # Converte a mensagem numa lista de inteiros
+                            partes_decripto: list[int] = cpt.RSA_decripto(partes_cripto, cpriv_d, cpub_n)  # Decripta a mensagem
+                            msg: str = cvm.converter_para_string(partes_decripto)  # Reune a mensagem numa string legível
+                            inter.print_decriptografada(msg)
+                            break
+                        except ValueError as err:
+                            print("\nO decriptografador espera mensagens com apenas algarismos decimais.")
+                            print("Tente novamente.")
+                            sleep(0.7)
+                            repete = True
 
                 elif opc_rsa == 4:  # Descriptografar arq
                     if not cyph_txt.exists():
@@ -138,26 +151,41 @@ if __name__ == "__main__":
                     sleep(0.7)
                     inter.atualiza_chaves()
 
-                elif opc_rsa == 6:  # Add chaves
-                    nome, cout_n, cout_e = inter.add_chaves()
-                    nova_linha: str = f"{nome} {cout_n} {cout_e}\n"
+                elif opc_rsa == 6:  # Gerenciar chaves
+                    nome = inter.add_chaves_nome()
+
+                    repete: bool = False
+                    while True:
+                        try:
+                            cout_n, cout_e = inter.add_chaves(repete)
+                            repete = False
+                            break
+                        except ValueError:
+                            print("\nAs chaves públicas devem conter apenas algarismos decimais.")
+                            print("Tente novamente.")
+                            sleep(0.7)
+                            repete = True
+
+                    remover: bool = True if (cout_n == 0 or cout_e == 0) else False 
+                    nova_linha: str = f"{nome},{cout_n},{cout_e}\n"
                     # Abre arquivo para listar todas as linhas
                     with outros_txt.open('r', encoding="utf-8") as outxt:
                         linhas: list[str] = outxt.readlines()
 
                     achou: bool = False
                     for i, linha in enumerate(linhas):
-                        nome_ou = linha.strip().split()[0]
+                        nome_ou = linha.strip().split(sep=',')[0]
                         if nome == nome_ou:
-                            linhas[i] = nova_linha  # Muda linha na lista
                             achou = True
+                            linhas[i] = "" if remover else nova_linha
                             sleep(0.7)
-                            inter.atualiza_arq(nome, achou)
+                            inter.atualiza_arq(nome, achou, remover)
                             break
                     if not achou:
-                        linhas.append(nova_linha)  # Adiciona linha na lista
+                        if not remover:
+                            linhas.append(nova_linha)  # Adiciona linha na lista
                         sleep(0.7)
-                        inter.atualiza_arq(nome)
+                        inter.atualiza_arq(nome, achou, remover)
                     # Reabre arquivo para reescrevê-lo totalmente com a lista atualizada
                     with outros_txt.open('w', encoding="utf-8") as outxt:
                         outxt.writelines(linhas)
@@ -167,7 +195,11 @@ if __name__ == "__main__":
                 sleep(1)
                 if rep == 1:
                     inter.voltar()
-                    break
                 elif rep == 2:
-                    inter.sair()
+                    sair = True
+                    break
+        
+        if sair:
+            inter.sair()
+            break
                     

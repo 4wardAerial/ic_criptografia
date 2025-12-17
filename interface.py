@@ -77,7 +77,7 @@ def opcoes_RSA() -> int:
     sleep(0.3)
     print("5) Criar chaves")
     sleep(0.3)
-    print("6) Adicionar chaves públicas")
+    print("6) Gerenciar chaves públicas")
     sleep(0.5)
     print("\n0) Voltar")
     sleep(0.5)
@@ -122,11 +122,12 @@ def RSA_cripto_arq(outros_dict: dict) -> tuple:
     nome = escolha_nomes(outros_dict)
     return (int(outros_dict[nome][0]), int(outros_dict[nome][1]))
 
-def RSA_decripto_msg() -> tuple:
-    cls()
-    print("\nDecriptografia RSA")
-    print("---------------------")
-    sleep(0.5)
+def RSA_decripto_msg(repete: bool) -> tuple:
+    if not repete:
+        cls()
+        print("\nDecriptografia RSA")
+        print("---------------------")
+        sleep(0.5)
     print("\nInsira a mensagem cifrada:")
     cyph = input("> ")
     sleep(0.5)
@@ -175,27 +176,40 @@ def atualiza_chaves():
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
     sleep(0.7)
 
-def add_chaves() -> tuple:
+def add_chaves_nome() -> str:
     cls()
-    print("\nAdicionar chaves públicas RSA")
+    print("\nGerenciar chaves públicas RSA")
     print("---------------------")
     sleep(0.5)
-    print("\nInsira o nome de quem quer adicionar:")
+    print("\nInsira o nome da pessoa que quer adicionar/remover do sistema:")
     nome = input("> ")
     sleep(0.5)
-    print("\nInsira a chave pública 'n' dessa pessoa:")
+    return nome
+
+def add_chaves(repete: bool) -> tuple:
+    if not repete:
+        print("\nInsira as chaves públicas (n, e) dessa pessoa.")
+        print("Para removê-la do sistema, insira 0 como uma das chaves:")
+        sleep(0.5)
+    print("\nChave pública 'n':")
     cpub_n = int(input("> "))
     sleep(0.5)
-    print("\nInsira a chave pública 'e' dessa pessoa:")
+    print("\nChave pública 'e':")
     cpub_e = int(input("> "))
     sleep(0.5)
-    return (nome, cpub_n, cpub_e)
+    return (cpub_n, cpub_e)
 
-def atualiza_arq(nome: str, achou: bool = False):
+def atualiza_arq(nome: str, achou: bool = False, remover: bool = False):
     if achou:
-        print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
+        if remover:
+            print(f"\n{nome} e suas chaves foram removid@s do sistema.")
+        else:
+            print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
     else:
-        print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
+        if remover:
+            print(f"\n{nome} não estava no sistema.")
+        else:
+            print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
     sleep(0.7)
 
 def arq_criptografado():
