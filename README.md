@@ -41,7 +41,7 @@ Eles então compartilham as chaves públicas (n, e), e João adiciona Maria em s
 
 ```267270009290200582326079739699382790 119690501687953434965511702811910125```
 
-E manda para Maria. Se Maria, no sistema dela, escolher decriptografar a mensagem acima com a sua própria chave privada, vai obter exatamente a mensagem original! Caso queira confirmar, o sistema já começa com os dados de Maria, então resta apenas copiar a mensagem e sua chave privada.
+e manda para Maria. Se Maria, no sistema dela, escolher decriptografar a mensagem acima com a sua própria chave privada, vai obter exatamente a mensagem original! Caso queira confirmar, o sistema já começa com os dados de Maria, então resta apenas copiar a mensagem e sua chave privada.
 
 ## Arquivos do progama
 - ```dados_usuario.txt```: Armazena as chaves públicas do usuário em duas linhas separadas. A primeira contém o valor de *n*, a segunda, de *e*.
