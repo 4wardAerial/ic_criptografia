@@ -16,11 +16,11 @@ Para as entradas e arquivos de mensagem a serem criptografadas, essas podem cont
 ### RSA
 - **Criptografar mensagem:** Criptografa a mensagem digitada para a pessoa selecionada, usando as chaves públicas dela. A mensagem corresponde a toda sequência de números digitada, incluindo os espaços.
 
-- **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~\arquivos\mensagens```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
+- **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
 
 - **Decriptografar mensagem:** Decriptografa a mensagem digitada para o usuário, usando a sua própria chave privada. 
 
-- **Decriptografar arquivo:** Decriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
+- **Decriptografar arquivo:** Decriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
 
 - **Gerenciar chaves públicas:** Permite que o usuário adicione, remova ou mude pessoas (e suas chaves públicas) do sistema, além de suas próprias chaves. Para adicionar uma nova pessoa, basta digitar seu nome e suas chaves. Caso ela já esteja no sistema, suas chaves públicas são atualizadas para as recém-inseridas. Para remover uma pessoa, basta digitar seu nome e inserir *0* como qualquer uma das chaves. 
 
@@ -66,7 +66,7 @@ e manda para Maria. Se Maria, no sistema dela, escolher decriptografar a mensage
 Para mandar mensagens em arquivos, a ideia é a mesma, a diferença é que João escreveria a mensagem no arquivo ```msg.txt``` e passaria para Maria o arquivo ```cyph.txt```.
 
 ## Arquivos do progama
-Esses arquivos encontram-se em ```~/arquivos/dados``` e são essenciais para que o programa funcione.
+Esses arquivos encontram-se em ```~sistema/src/arquivos/dados``` e são essenciais para que o programa funcione.
 
 - ```dados_usuario.txt```: Armazena as chaves públicas do usuário em duas linhas separadas. A primeira contém o valor de *n*, a segunda, de *e*.
 
@@ -75,3 +75,5 @@ Esses arquivos encontram-se em ```~/arquivos/dados``` e são essenciais para que
 - ```primos.txt```: Armazena uma lista de vários primos grandes, um em cada linha.
 
 Não é recomendado que se altere esse arquivos manualmente, visto que sua formatação incorreta vai interromper o funcionamento do sistema. Todas as alterações importantes podem ser feitas pelo próprio sistema.
+
+A pasta ```~\src``` (fora da pasta ```~\sistema```) contém os arquivos de código e os arquivos de texto originais, que foram convertidos em um executável para facilitar o uso do sistema com uso da ferramenta [*auto-py-to-exe*](https://github.com/brentvollebregt/auto-py-to-exe). Note que alterar os arquivos de texto dessa pasta não influencia o sistema, pois esse usa os que estão no diretório ```~sistema/src/arquivos```.
