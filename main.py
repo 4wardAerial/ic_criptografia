@@ -202,4 +202,5 @@ if __name__ == "__main__":
         
         if sair:
             inter.sair()
+            sleep(2)
             break
