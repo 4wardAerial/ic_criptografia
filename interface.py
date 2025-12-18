@@ -26,8 +26,13 @@ def escolha_nomes(outros_dict: dict) -> str:
 
 def inicio():
     cls()
-    print("\nBem-vind@ ao sistema.")
+    sleep(0.3)
     print("---------------------")
+    sleep(0.3)
+    print("Bem-vind@ ao sistema.")
+    sleep(0.3)
+    print("---------------------")
+    sleep(2)
 
 def repetir() -> int:
     print("\n---------------------")
@@ -46,23 +51,12 @@ def voltar():
 def sair():
     print("\nObrigad@ por usar o sistema.")
     print("---------------------")
-
-def tipo_de_cripto() -> int:
-    print("\nQual sistema criptográfico deseja utilizar?")
-    sleep(0.5)
-    print("\n1) RSA")
-    sleep(0.3)
-    print("2) ElGamal")
-    sleep(0.3)
-    print("3) Polinomial")
-    sleep(0.3)
-    print("\n0) Sair")
-    sleep(0.5)
-    return escolha_opcoes(('0', '1', '2', '3'))
+    sleep(2)
 
 def opcoes_RSA() -> int:
     cls()
-    print("\nCriptografia RSA")
+    print("---------------------")
+    print("Criptografia RSA")
     print("---------------------")
     sleep(0.5)
     print("\nO que você deseja fazer?")
@@ -79,7 +73,7 @@ def opcoes_RSA() -> int:
     sleep(0.3)
     print("6) Criar chaves")
     sleep(0.5)
-    print("\n0) Voltar")
+    print("\n0) Sair")
     sleep(0.5)
     return escolha_opcoes(('0', '1', '2', '3', '4', '5', '6'))
 
@@ -88,6 +82,17 @@ def listar_nomes(lista_nomes):
     for nome in lista_nomes:
         sleep(0.3)
         print(f"- {nome}")
+    sleep(0.5)
+
+def listar_tudo(outros_dict: dict, cpub_n: int, cpub_e: int):
+    tam_nome = max(len(nome) for nome in outros_dict)
+    tam_n = max(len(str(v1)) for v1, _ in outros_dict.values())
+    tam_e = max(len(str(v2)) for _, v2 in outros_dict.values())
+    print(f"- {'Você':<{tam_nome}} : {str(cpub_n):<{tam_n}} , {str(cpub_e):<{tam_e}}")
+    print()
+    for k in outros_dict.keys():
+        sleep(0.3)
+        print(f"- {k.strip():<{tam_nome}} : {str(outros_dict[k][0]).strip():<{tam_n}} , {str(outros_dict[k][1]).strip():<{tam_e}}")
     sleep(0.5)
 
 def ler_mensagem(repete: bool) -> str:
@@ -139,11 +144,12 @@ def print_decriptografada(msg: str):
     print("\nA mensagem decriptografada é:")
     print(msg)
 
-def RSA_decripto_arq() -> int:
-    cls()
-    print("\nDecriptografia RSA de Arquivo")
-    print("---------------------")
-    sleep(0.5)
+def RSA_decripto_arq(repete: bool) -> int:
+    if not repete:
+        cls()
+        print("\nDecriptografia RSA de Arquivo")
+        print("---------------------")
+        sleep(0.5)
     print("\nInsira sua chave privada:")
     cpriv_d = int(input("> "))
     return cpriv_d
@@ -171,16 +177,19 @@ def print_chaves(p: int, q: int, n: int, e: int, d: int):
 def atualiza_chaves():
     print("\nSua chave pública foi atualizada no sistema! Ela pode ser encontrada em:")
     sleep(0.5)
-    print("~\\arquivos\\dados_usuario.txt")
+    print("~\\arquivos\\dados\\dados_usuario.txt")
     sleep(0.5)
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
     sleep(0.7)
 
-def add_chaves_nome() -> str:
+def add_chaves_nome(outros_dict: dict, cpub_n: int, cpub_e: int) -> str:
     cls()
     print("\nGerenciar chaves públicas RSA")
     print("---------------------")
     sleep(0.5)
+    print("\nNo momento o sistema tem as seguintes chaves:")
+    sleep(0.7)
+    listar_tudo(outros_dict, cpub_n, cpub_e)
     print("\nInsira o nome da pessoa que quer adicionar/remover do sistema:")
     nome = input("> ")
     sleep(0.5)
@@ -215,13 +224,13 @@ def atualiza_arq(nome: str, achou: bool = False, remover: bool = False):
 def arq_criptografado():
     print("\nSeu arquivo foi criptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
-    print("~\\arquivos\\cyph.txt")
+    print("~\\arquivos\\mensagens\\cyph.txt")
     sleep(0.7)
 
 def arq_decriptografado():
     print("\nSeu arquivo foi decriptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
-    print("~\\arquivos\\msg.txt")
+    print("~\\arquivos\\mensagens\\msg.txt")
     sleep(0.7)
 
 def arq_inexistente(nome: str):
@@ -229,6 +238,6 @@ def arq_inexistente(nome: str):
     sleep(1)
     print(f"Certifique-se que há um arquivo de nome \"{nome}.txt\" no diretório:")
     sleep(0.3)
-    print("~\\arquivos")
+    print("~\\mensagens\\arquivos")
     sleep(0.7)
 
