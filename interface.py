@@ -53,30 +53,6 @@ def sair():
     print("---------------------")
     sleep(2)
 
-def opcoes_RSA() -> int:
-    cls()
-    print("---------------------")
-    print("Criptografia RSA")
-    print("---------------------")
-    sleep(0.5)
-    print("\nO que você deseja fazer?")
-    sleep(0.5)
-    print("\n1) Criptografar mensagem")
-    sleep(0.3)
-    print("2) Criptografar arquivo")
-    sleep(0.3)
-    print("3) Decriptografar mensagem")
-    sleep(0.3)
-    print("4) Decriptografar arquivo")
-    sleep(0.3)
-    print("5) Gerenciar chaves públicas")
-    sleep(0.3)
-    print("6) Criar chaves")
-    sleep(0.5)
-    print("\n0) Sair")
-    sleep(0.5)
-    return escolha_opcoes(('0', '1', '2', '3', '4', '5', '6'))
-
 def listar_nomes(lista_nomes):
     print()
     for nome in lista_nomes:
@@ -101,6 +77,53 @@ def ler_mensagem(repete: bool) -> str:
     msg = input("> ")
     return msg
 
+def atualiza_arq(nome: str, achou: bool = False, remover: bool = False):
+    if achou:
+        if remover:
+            print(f"\n{nome} e suas chaves foram removid@s do sistema.")
+        else:
+            print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
+    else:
+        if remover:
+            print(f"\n{nome} não estava no sistema.")
+        else:
+            print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
+    sleep(0.7)
+
+def arq_inexistente(nome: str):
+    print("\nO arquivo necessário não foi encontrado.")
+    sleep(1)
+    print(f"Certifique-se que há um arquivo de nome \"{nome}.txt\" no diretório:")
+    sleep(0.3)
+    print("~\\mensagens\\arquivos")
+    sleep(0.7)
+
+##################################################
+def opcoes_RSA() -> int:
+    cls()
+    print("---------------------")
+    print("Criptografia RSA")
+    print("---------------------")
+    sleep(0.5)
+    print("\nO que você deseja fazer?")
+    sleep(0.5)
+    print("\n1) Criptografar mensagem")
+    sleep(0.3)
+    print("2) Criptografar arquivo")
+    sleep(0.3)
+    print("3) Decriptografar mensagem")
+    sleep(0.3)
+    print("4) Decriptografar arquivo")
+    sleep(0.3)
+    print("5) Gerenciar chaves públicas")
+    sleep(0.3)
+    print("6) Criar chaves")
+    sleep(0.5)
+    print("\n0) Sair")
+    sleep(0.5)
+    return escolha_opcoes(('0', '1', '2', '3', '4', '5', '6'))
+
+##################################################
 def RSA_cripto_msg(outros_dict: dict) -> tuple:
     cls()
     print("\nCriptografia RSA")
@@ -116,6 +139,7 @@ def print_criptografada(partes_cripto: list[int]):
     print("\nA mensagem criptografada é:")
     print(*partes_cripto, sep=' ')
 
+##################################################
 def RSA_cripto_arq(outros_dict: dict) -> tuple:
     cls()
     print("\nCriptografia RSA de Arquivo")
@@ -127,6 +151,13 @@ def RSA_cripto_arq(outros_dict: dict) -> tuple:
     nome = escolha_nomes(outros_dict)
     return (int(outros_dict[nome][0]), int(outros_dict[nome][1]))
 
+def arq_criptografado():
+    print("\nSeu arquivo foi criptografado com sucesso! Ele pode ser encontrado em:")
+    sleep(0.5)
+    print("~\\arquivos\\mensagens\\cyph.txt")
+    sleep(0.7)
+
+##################################################
 def RSA_decripto_msg(repete: bool) -> tuple:
     if not repete:
         cls()
@@ -144,6 +175,7 @@ def print_decriptografada(msg: str):
     print("\nA mensagem decriptografada é:")
     print(msg)
 
+##################################################
 def RSA_decripto_arq(repete: bool) -> int:
     if not repete:
         cls()
@@ -154,6 +186,14 @@ def RSA_decripto_arq(repete: bool) -> int:
     cpriv_d = int(input("> "))
     return cpriv_d
 
+
+def arq_decriptografado():
+    print("\nSeu arquivo foi decriptografado com sucesso! Ele pode ser encontrado em:")
+    sleep(0.5)
+    print("~\\arquivos\\mensagens\\msg.txt")
+    sleep(0.7)
+
+##################################################
 def criar_chaves():
     cls()
     print("\nCriar chaves RSA")
@@ -182,6 +222,7 @@ def atualiza_chaves():
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
     sleep(0.7)
 
+##################################################
 def add_chaves_nome(outros_dict: dict, cpub_n: int, cpub_e: int) -> str:
     cls()
     print("\nGerenciar chaves públicas RSA")
@@ -208,36 +249,4 @@ def add_chaves(repete: bool) -> tuple:
     sleep(0.5)
     return (cpub_n, cpub_e)
 
-def atualiza_arq(nome: str, achou: bool = False, remover: bool = False):
-    if achou:
-        if remover:
-            print(f"\n{nome} e suas chaves foram removid@s do sistema.")
-        else:
-            print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
-    else:
-        if remover:
-            print(f"\n{nome} não estava no sistema.")
-        else:
-            print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
-    sleep(0.7)
-
-def arq_criptografado():
-    print("\nSeu arquivo foi criptografado com sucesso! Ele pode ser encontrado em:")
-    sleep(0.5)
-    print("~\\arquivos\\mensagens\\cyph.txt")
-    sleep(0.7)
-
-def arq_decriptografado():
-    print("\nSeu arquivo foi decriptografado com sucesso! Ele pode ser encontrado em:")
-    sleep(0.5)
-    print("~\\arquivos\\mensagens\\msg.txt")
-    sleep(0.7)
-
-def arq_inexistente(nome: str):
-    print("\nO arquivo necessário não foi encontrado.")
-    sleep(1)
-    print(f"Certifique-se que há um arquivo de nome \"{nome}.txt\" no diretório:")
-    sleep(0.3)
-    print("~\\mensagens\\arquivos")
-    sleep(0.7)
-
+##################################################
