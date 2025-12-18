@@ -6,7 +6,7 @@ O programa foi feito totalmente em Python e roda no terminal. Instruções para 
 ## Rodando o programa
 Sua máquina precisa ter ```Python 3``` instalado para rodar o programa.
 
-Dentro da pasta instalada, basta executar o arquivo ```sistema.exe```
+Dentro da pasta instalada, basta executar o arquivo ```sistema.exe```, encontrado dentro da pasta ```~\sistema```.
 
 ## Uso do programa
 Para selecionar uma opções nos menus, basta digitar o número daquela opção e pressionar *Enter*. Caso digite uma opção inválida, o sistema vai apenas recusá-la e pedir outra entrada.
