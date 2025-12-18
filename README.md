@@ -34,7 +34,7 @@ Para as entradas e arquivos de mensagem a serem criptografadas, essas podem cont
     | Leticia | 111777757087311284697527464893754543574057   | 65537    |  
     | João    | 4274790255060999669466438070099888371        | 65537    |
 
-> *OBS.*: As chaves privadas das pessoas acima não estão armazenadas no sistema, mas foram guardadas abaixo caso seja necessário:
+    > *OBS.*: As chaves privadas das pessoas acima não estão armazenadas no sistema, mas foram guardadas abaixo caso seja necessário:
 
     | Nome    | Chave privada 'd'                            |
     |---------|----------------------------------------------|
@@ -46,7 +46,7 @@ Para as entradas e arquivos de mensagem a serem criptografadas, essas podem cont
 
 - **Criar chaves:** Escolhe dois primos aleatórios (dentre os pré-listados num arquivo) e gera o par de chaves públicas (*n*, *e*) e a chave privada (*d*) para o usuário. As chaves públicas são salvas em um arquivo no sistema e passam a ser as novas chaves do usuário. A chave privada não é salva e o usuário deve salvá-la por conta própria.
 
-> *OBS.*: Embora o sistema já tenha chaves públicas salvas para o usuário, é necessário que novas sejam geradas para que o novo usuário (você) possa guardar a chave privada correspondente.
+    > *OBS.*: Embora o sistema já tenha chaves públicas salvas para o usuário, é necessário que novas sejam geradas para que o novo usuário (você) possa guardar a chave privada correspondente.
 
 #### **# Exemplo**
 João usa seu sistema para criar chaves novas:
