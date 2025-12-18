@@ -136,41 +136,64 @@ if __name__ == "__main__":
         elif opc_rsa == 5:  # Gerenciar chaves
             nome = inter.add_chaves_nome(outros_dict, cpub_n, cpub_e)
 
-            repete: bool = False
-            while True:
-                try:
-                    cout_n, cout_e = inter.add_chaves(repete)
-                    repete = False
-                    break
-                except ValueError:
-                    print("\nAs chaves públicas devem conter apenas algarismos decimais.")
-                    print("Tente novamente.")
-                    sleep(0.7)
-                    repete = True
+            if nome.lower() == "eu":
+                repete: bool = False
+                while True:
+                    try:
+                        cpub_n, cpub_e = inter.add_chaves_usuario(repete)
+                        cancelar: bool = False
+                        if cpub_n == 0 or cpub_e == 0:
+                            cancelar = True
+                        else:
+                            repete = False
+                            with usuario_txt.open('w', encoding="utf-8") as dutxt:
+                                cpub: str = f"{cpub_n}\n{cpub_e}"
+                                dutxt.write(cpub)
+                            sleep(0.7)
+                        inter.atualiza_arq_usuario(cancelar)
+                        break
+                    except ValueError:
+                        print("\nAs chaves públicas devem conter apenas algarismos decimais.")
+                        print("Tente novamente.")
+                        sleep(0.7)
+                        repete = True
+            else:
+                repete: bool = False
+                while True:
+                    try:
+                        cout_n, cout_e = inter.add_chaves_outros(repete)
+                        repete = False
+                        break
+                    except ValueError:
+                        print("\nAs chaves públicas devem conter apenas algarismos decimais.")
+                        print("Tente novamente.")
+                        sleep(0.7)
+                        repete = True
 
-            remover: bool = True if (cout_n == 0 or cout_e == 0) else False 
-            nova_linha: str = f"{nome},{cout_n},{cout_e}\n"
-            # Abre arquivo para listar todas as linhas
-            with outros_txt.open('r', encoding="utf-8") as outxt:
-                linhas: list[str] = outxt.readlines()
+                remover: bool = True if (cout_n == 0 or cout_e == 0) else False 
+                nova_linha: str = f"{nome},{cout_n},{cout_e}\n"
+                # Abre arquivo para listar todas as linhas
+                with outros_txt.open('r', encoding="utf-8") as outxt:
+                    linhas: list[str] = outxt.readlines()
 
-            achou: bool = False
-            for i, linha in enumerate(linhas):
-                nome_ou = linha.strip().split(sep=',')[0]
-                if nome == nome_ou:
-                    achou = True
-                    linhas[i] = "" if remover else nova_linha
+                achou: bool = False
+                for i, linha in enumerate(linhas):
+                    nome_ou = linha.strip().split(sep=',')[0]
+                    if nome.lower() == nome_ou.lower():
+                        achou = True
+                        linhas[i] = "" if remover else nova_linha
+                        sleep(0.7)
+                        inter.atualiza_arq_outros(nome, achou, remover)
+                        break
+                if not achou:
+                    if not remover:
+                        linhas.append(nova_linha)  # Adiciona linha na lista
                     sleep(0.7)
-                    inter.atualiza_arq(nome, achou, remover)
-                    break
-            if not achou:
-                if not remover:
-                    linhas.append(nova_linha)  # Adiciona linha na lista
-                sleep(0.7)
-                inter.atualiza_arq(nome, achou, remover)
-            # Reabre arquivo para reescrevê-lo totalmente com a lista atualizada
-            with outros_txt.open('w', encoding="utf-8") as outxt:
-                outxt.writelines(linhas)
+                    inter.atualiza_arq_outros(nome, achou, remover)
+                # Reabre arquivo para reescrevê-lo totalmente com a lista atualizada
+                with outros_txt.open('w', encoding="utf-8") as outxt:
+                    # Garante que toda linha tem um '\n' no final
+                    outxt.write(''.join(linha if linha.endswith('\n') else linha + '\n'for linha in linhas if linha))
             
         elif opc_rsa == 6:  # Criar chaves
             inter.criar_chaves()
@@ -189,7 +212,6 @@ if __name__ == "__main__":
                 dutxt.write(cpub)
             sleep(0.7)
             inter.atualiza_chaves()
-
 
         sleep(1)
         rep: int = inter.repetir()

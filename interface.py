@@ -64,7 +64,7 @@ def listar_tudo(outros_dict: dict, cpub_n: int, cpub_e: int):
     tam_nome = max(len(nome) for nome in outros_dict)
     tam_n = max(len(str(v1)) for v1, _ in outros_dict.values())
     tam_e = max(len(str(v2)) for _, v2 in outros_dict.values())
-    print(f"\n- {'Você':<{tam_nome}} : {str(cpub_n):<{tam_n}} , {str(cpub_e):<{tam_e}}")
+    print(f"\n- {'Eu':<{tam_nome}} : {str(cpub_n):<{tam_n}} , {str(cpub_e):<{tam_e}}")
     print()
     for k in outros_dict.keys():
         sleep(0.3)
@@ -76,19 +76,6 @@ def ler_mensagem(repete: bool) -> str:
         print("\nInsira sua mensagem:")
     msg = input("> ")
     return msg
-
-def atualiza_arq(nome: str, achou: bool = False, remover: bool = False):
-    if achou:
-        if remover:
-            print(f"\n{nome} e suas chaves foram removid@s do sistema.")
-        else:
-            print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
-    else:
-        if remover:
-            print(f"\n{nome} não estava no sistema.")
-        else:
-            print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
-    sleep(0.7)
 
 def arq_inexistente(nome: str):
     print("\nO arquivo necessário não foi encontrado.")
@@ -231,15 +218,20 @@ def add_chaves_nome(outros_dict: dict, cpub_n: int, cpub_e: int) -> str:
     print("\nNo momento o sistema tem as seguintes chaves:")
     sleep(0.7)
     listar_tudo(outros_dict, cpub_n, cpub_e)
-    print("\nInsira o nome da pessoa que quer adicionar/remover do sistema:")
+    print("\nInsira o nome da pessoa que quer adicionar/remover do sistema.")
+    print("Para mudar a sua chave, insira \"Eu\":")
     nome = input("> ")
     sleep(0.5)
     return nome
 
-def add_chaves(repete: bool) -> tuple:
+def add_chaves_usuario(repete: bool) -> tuple:
     if not repete:
-        print("\nInsira as chaves públicas (n, e) dessa pessoa.")
-        print("Para removê-la do sistema, insira 0 como uma das chaves:")
+        print("\nInsira suas novas chaves públicas (n, e).")
+        sleep(0.5)
+        print("\nO sistema não vai criar uma chave privada correspondente, então\n" \
+        "certifique-se de já tê-la em mãos antes de fazer isso.")
+        sleep(0.5)
+        print("Para cancelar a mudança, insira 0 como uma das chaves:")
         sleep(0.5)
     print("\nChave pública 'n':")
     cpub_n = int(input("> "))
@@ -248,5 +240,39 @@ def add_chaves(repete: bool) -> tuple:
     cpub_e = int(input("> "))
     sleep(0.5)
     return (cpub_n, cpub_e)
+
+def add_chaves_outros(repete: bool) -> tuple:
+    if not repete:
+        print("\nInsira as chaves públicas (n, e) dessa pessoa.")
+        sleep(0.5)
+        print("Para removê-la do sistema, insira 0 como uma das chaves:")
+        sleep(0.5)
+    print("\nChave pública 'n':")
+    cout_n = int(input("> "))
+    sleep(0.5)
+    print("\nChave pública 'e':")
+    cout_e = int(input("> "))
+    sleep(0.5)
+    return (cout_n, cout_e)
+
+def atualiza_arq_usuario(cancelar: bool):
+    if cancelar:
+        print("\nSuas chaves públicas não foram mudadas.")
+    else:
+        print("\nSuas chaves públicas foram atualizadas no sistema!")
+    sleep(0.7)
+
+def atualiza_arq_outros(nome: str, achou: bool = False, remover: bool = False):
+    if achou:
+        if remover:
+            print(f"\n{nome} e suas chaves foram removid@s do sistema.")
+        else:
+            print(f"\n{nome} já estava no sistema. Suas chaves públicas foram atualizadas!")
+    else:
+        if remover:
+            print(f"\n{nome} não estava no sistema.")
+        else:
+            print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
+    sleep(0.7)
 
 ##################################################
