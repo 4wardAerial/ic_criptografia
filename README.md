@@ -1,5 +1,5 @@
 # Sistema Criptográfico
-Esse repositório contém um projeto complementar à Iniciação Científica do PICME sobre Estruturas Algébricas e Criptografia, e consiste em um programa para criptografar e decriptografar mensagens ou arquivos de texto por sistemas de criptografia de chave pública estudados na IC; mais precisamente: *RSA*, *ElGamal* e *Curvas Elípticas*. No momento, apenas RSA foi implementada.
+Esse repositório contém um projeto complementar à Iniciação Científica do PICME sobre Estruturas Algébricas e Criptografia, e consiste em um programa para criptografar e descriptografar mensagens ou arquivos de texto por sistemas de criptografia de chave pública estudados na IC; mais precisamente: *RSA*, *ElGamal* e *Curvas Elípticas*. No momento, apenas RSA foi implementada.
 
 O programa foi feito totalmente em Python e roda no terminal. Instruções para utilização podem ser encontradas abaixo. Os algoritmos para calcular a encriptação, bem como as funções necessárias para isso, foram baseados no livro usado na IC, *Algebra for Applications, A. Slinko*.
 
@@ -18,9 +18,9 @@ Para as entradas e arquivos de mensagem a serem criptografadas, essas podem cont
 
 - **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
 
-- **Decriptografar mensagem:** Decriptografa a mensagem digitada para o usuário, usando a sua própria chave privada. 
+- **Descriptografar mensagem:** Descriptografa a mensagem digitada para o usuário, usando a sua própria chave privada. 
 
-- **Decriptografar arquivo:** Decriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
+- **Descriptografar arquivo:** Descriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
 
 - **Gerenciar chaves públicas:** Permite que o usuário adicione, remova ou mude pessoas (e suas chaves públicas) do sistema, além de suas próprias chaves. Para adicionar uma nova pessoa, basta digitar seu nome e suas chaves. Caso ela já esteja no sistema, suas chaves públicas são atualizadas para as recém-inseridas. Para remover uma pessoa, basta digitar seu nome e inserir *0* como qualquer uma das chaves. 
 
@@ -61,7 +61,7 @@ Eles então compartilham as chaves públicas (n, e), e João adiciona Maria em s
 
 ```267270009290200582326079739699382790 119690501687953434965511702811910125```
 
-e manda para Maria. Se Maria, no sistema dela, escolher decriptografar a mensagem acima com a sua própria chave privada, vai obter exatamente a mensagem original! Caso queira confirmar, o sistema já começa com os dados de Maria, então resta apenas copiar a mensagem e sua chave privada.
+e manda para Maria. Se Maria, no sistema dela, escolher descriptografar a mensagem acima com a sua própria chave privada, vai obter exatamente a mensagem original! Caso queira confirmar, o sistema já começa com os dados de Maria, então resta apenas copiar a mensagem e sua chave privada.
 
 Para mandar mensagens em arquivos, a ideia é a mesma, a diferença é que João escreveria a mensagem no arquivo ```msg.txt``` e passaria para Maria o arquivo ```cyph.txt```.
 

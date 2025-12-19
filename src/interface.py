@@ -98,9 +98,9 @@ def opcoes_RSA() -> int:
     sleep(0.3)
     print("2) Criptografar arquivo")
     sleep(0.3)
-    print("3) Decriptografar mensagem")
+    print("3) Descriptografar mensagem")
     sleep(0.3)
-    print("4) Decriptografar arquivo")
+    print("4) Descriptografar arquivo")
     sleep(0.3)
     print("5) Gerenciar chaves públicas")
     sleep(0.3)
@@ -148,7 +148,7 @@ def arq_criptografado():
 def RSA_decripto_msg(repete: bool) -> tuple:
     if not repete:
         cls()
-        print("\nDecriptografia RSA")
+        print("\nDescriptografia RSA")
         print("---------------------")
         sleep(0.5)
     print("\nInsira a mensagem cifrada:")
@@ -159,14 +159,14 @@ def RSA_decripto_msg(repete: bool) -> tuple:
     return (cyph, cpriv_d)
 
 def print_decriptografada(msg: str):
-    print("\nA mensagem decriptografada é:")
+    print("\nA mensagem descriptografada é:")
     print(msg)
 
 ##################################################
 def RSA_decripto_arq(repete: bool) -> int:
     if not repete:
         cls()
-        print("\nDecriptografia RSA de Arquivo")
+        print("\nDescriptografia RSA de Arquivo")
         print("---------------------")
         sleep(0.5)
     print("\nInsira sua chave privada:")
@@ -175,7 +175,7 @@ def RSA_decripto_arq(repete: bool) -> int:
 
 
 def arq_decriptografado():
-    print("\nSeu arquivo foi decriptografado com sucesso! Ele pode ser encontrado em:")
+    print("\nSeu arquivo foi descriptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
     print("~\\arquivos\\mensagens\\msg.txt")
     sleep(0.7)
