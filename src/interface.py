@@ -82,7 +82,7 @@ def arq_inexistente(nome: str):
     sleep(1)
     print(f"Certifique-se que há um arquivo de nome \"{nome}.txt\" no diretório:")
     sleep(0.3)
-    print("~sistema\\content\\src\\arquivos\\mensagens")
+    print("~sistema\\content\\arquivos\\mensagens")
     sleep(0.7)
 
 ##################################################
@@ -141,7 +141,7 @@ def RSA_cripto_arq(outros_dict: dict) -> tuple:
 def arq_criptografado():
     print("\nSeu arquivo foi criptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
-    print("~sistema\\content\\src\\arquivos\\mensagens\\cyph.txt")
+    print("~sistema\\content\\arquivos\\mensagens\\cyph.txt")
     sleep(0.7)
 
 ##################################################
@@ -177,7 +177,7 @@ def RSA_decripto_arq(repete: bool) -> int:
 def arq_decriptografado():
     print("\nSeu arquivo foi descriptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
-    print("~sistema\\content\\src\\arquivos\\mensagens\\msg.txt")
+    print("~sistema\\content\\arquivos\\mensagens\\msg.txt")
     sleep(0.7)
 
 ##################################################
@@ -279,7 +279,7 @@ def mudar_ou_nao() -> int:
 def atualiza_chaves():
     print("\nSua chave pública foi atualizada no sistema! Ela pode ser encontrada em:")
     sleep(0.5)
-    print("~sistema\\content\\src\\arquivos\\dados\\dados_usuario.txt")
+    print("~sistema\\content\\arquivos\\dados\\dados_usuario.txt")
     sleep(0.5)
     print("Sua chave privada não será salva! Guarde-a em um local seguro.")
     sleep(0.7)

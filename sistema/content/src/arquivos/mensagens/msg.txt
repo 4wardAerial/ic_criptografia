@@ -1,5 +1,0 @@
-Mensagem em arquivo para teste!!!
-
-
-Testando       espaços...        e também linhas maiores e compridas . . .
-deve funcionar (espero)

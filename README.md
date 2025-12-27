@@ -8,6 +8,8 @@ Sua máquina precisa ter ```Python 3``` instalado para rodar o programa.
 
 Após instalar a pasta compactada, extraia seu conteúdo e execute o arquivo ```sistema.exe```, encontrado dentro da pasta ```~\sistema```.
 
+> *OBS.*: É bem provável que o Windows flagre o exectuável como perigoso, já que não tem um certificado digital. Você pode ignorar o aviso.
+
 ## Uso do programa
 Para selecionar uma opções nos menus, basta digitar o número daquela opção e pressionar *Enter*. Caso digite uma opção inválida, o sistema vai apenas recusá-la e pedir outra entrada.
 

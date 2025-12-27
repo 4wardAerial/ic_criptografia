@@ -10,7 +10,6 @@ def RSA_decripto(partes_cripto: list[int], cpriv_d: int, cpub_n: int) -> list[in
     partes_decripto = []
     for cyph in partes_cripto:
         partes_decripto.append(pow(cyph, cpriv_d, cpub_n))
-    print(partes_decripto)
     return partes_decripto
 
 def calculadora_chaves_RSA(p: int, q: int):

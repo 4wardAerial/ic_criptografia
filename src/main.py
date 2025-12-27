@@ -14,9 +14,9 @@ if __name__ == "__main__":
         DIR = Path(__file__).resolve().parent
         usuario_txt: Path = DIR / "arquivos" / "dados" / "dados_usuario.txt"
         outros_txt: Path = DIR / "arquivos" / "dados" / "dados_publicos.txt"
+        primos_txt: Path = DIR  / "arquivos" / "dados" / "primos.txt"
         msg_txt: Path = DIR / "arquivos" / "mensagens" / "msg.txt"
         cyph_txt: Path = DIR  / "arquivos" / "mensagens" / "cyph.txt"
-        primos_txt: Path = DIR  / "arquivos" / "dados" / "primos.txt"
 
         while True:
             opc_rsa: int = inter.opcoes_RSA()
