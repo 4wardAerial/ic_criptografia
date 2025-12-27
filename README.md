@@ -13,7 +13,7 @@ Para selecionar uma opções nos menus, basta digitar o número daquela opção 
 
 Para as entradas e arquivos de mensagem a serem criptografadas, essas podem conter apenas os caracteres: ```a, b, ..., y, z```, ```A, B, ..., Y, Z```, ```0, 1, ..., 8, 9```, ```, . : ! ? ( )``` e ```espaço```.
 
-Para encerrar o programa, pode fazê-lo pelas opções do menu, clicando no botão *X* no canto superior direito ou pressionando *Ctrl + C* no teclado
+Para encerrar o programa, pode fazê-lo pelas opções do menu, clicando no botão *X* no canto superior direito ou pressionando *Ctrl + C* no teclado.
 
 ### RSA
 - **Criptografar mensagem:** Criptografa a mensagem digitada para a pessoa selecionada, usando as chaves públicas dela. A mensagem corresponde a toda sequência de números digitada, incluindo os espaços.
