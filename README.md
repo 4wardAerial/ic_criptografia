@@ -20,11 +20,11 @@ Para encerrar o programa, pode fazê-lo pelas opções do menu, clicando no bot�
 ### RSA
 - **Criptografar mensagem:** Criptografa a mensagem digitada para a pessoa selecionada, usando as chaves públicas dela. A mensagem corresponde a toda sequência de números digitada, incluindo os espaços.
 
-- **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
+- **Criptografar arquivo:** Criptografa todo o conteúdo do arquivo de texto ```msg.txt```, localizado na pasta ```~sistema\content\arquivos\mensagens```, para a pessoa selecionada e salva o resultado em outro arquivo de texto, ```cyph.txt``` no mesmo diretório. 
 
 - **Descriptografar mensagem:** Descriptografa a mensagem digitada para o usuário, usando a sua própria chave privada. 
 
-- **Descriptografar arquivo:** Descriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~sistema\content\src\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
+- **Descriptografar arquivo:** Descriptografa todo o conteúdo do arquivo de texto ```cyph.txt```, localizado na pasta ```~sistema\content\arquivos\mensagens```, para o usuário e salva o resultado em outro arquivo de texto, ```msg.txt``` no mesmo diretório.
 
 - **Gerenciar chaves públicas:** Permite que o usuário adicione, remova ou mude pessoas (e suas chaves públicas) do sistema, além de suas próprias chaves. Para adicionar uma nova pessoa, basta digitar seu nome e suas chaves. Caso ela já esteja no sistema, suas chaves públicas são atualizadas para as recém-inseridas. Para remover uma pessoa, basta digitar seu nome e inserir *0* como qualquer uma das chaves. 
 
