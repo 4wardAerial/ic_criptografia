@@ -13,6 +13,8 @@ Para selecionar uma opções nos menus, basta digitar o número daquela opção 
 
 Para as entradas e arquivos de mensagem a serem criptografadas, essas podem conter apenas os caracteres: ```a, b, ..., y, z```, ```A, B, ..., Y, Z```, ```0, 1, ..., 8, 9```, ```, . : ! ? ( )``` e ```espaço```.
 
+Para encerrar o programa, pode fazê-lo pelas opções do menu, clicando no botão *X* no canto superior direito ou pressionando *Ctrl + C* no teclado
+
 ### RSA
 - **Criptografar mensagem:** Criptografa a mensagem digitada para a pessoa selecionada, usando as chaves públicas dela. A mensagem corresponde a toda sequência de números digitada, incluindo os espaços.
 
@@ -44,9 +46,9 @@ Para as entradas e arquivos de mensagem a serem criptografadas, essas podem cont
     | Leticia | 19525333218419207273412107861800528952033    |
     | João    | 3927455801115902648102102854245339617        |
 
-- **Criar chaves:** Escolhe dois primos aleatórios (dentre os pré-listados num arquivo) e gera o par de chaves públicas (*n*, *e*) e a chave privada (*d*) para o usuário. As chaves públicas são salvas em um arquivo no sistema e passam a ser as novas chaves do usuário. A chave privada não é salva e o usuário deve salvá-la por conta própria.
+- **Criar chaves:** Escolhe dois primos aleatórios (dentre os pré-listados num arquivo) e gera o par de chaves públicas (*n*, *e*) e a chave privada (*d*) para o usuário. Caso o usuário queira trocar de chaves, as novas são salvas em um arquivo no sistema, se não, nada muda. A chave privada não é salva e o usuário deve salvá-la por conta própria.
 
-    > *OBS.*: Embora o sistema já tenha chaves públicas salvas para o usuário, é necessário que novas sejam geradas para que o novo usuário (você) possa guardar a chave privada correspondente.
+    > *OBS.*: Embora o sistema já tenha chaves públicas salvas para o usuário, é necessário que novas sejam geradas para que o novo usuário (você) possa guardar uma nova chave privada correspondente.
 
 #### **# Exemplo**
 João usa seu sistema para criar chaves novas:
@@ -74,6 +76,6 @@ Esses arquivos encontram-se em ```~sistema/src/arquivos/dados``` e são essencia
  
 - ```primos.txt```: Armazena uma lista de vários primos grandes, um em cada linha.
 
-Não é recomendado que se altere esse arquivos manualmente, visto que sua formatação incorreta vai interromper o funcionamento do sistema. Todas as alterações importantes podem ser feitas pelo próprio sistema.
+Não é recomendado que se altere esse arquivos manualmente, visto que sua formatação incorreta vai interromper o funcionamento do sistema. Todas as alterações importantes podem ser feitas dentro do próprio programa.
 
 A pasta ```~\src``` (fora da pasta ```~\sistema```) contém os arquivos de código e os arquivos de texto originais, que foram convertidos em um executável para facilitar o uso do sistema com uso da ferramenta [*auto-py-to-exe*](https://github.com/brentvollebregt/auto-py-to-exe). Note que alterar os arquivos de texto dessa pasta não influencia o sistema, pois esse usa os que estão no diretório ```~sistema/src/arquivos```.
