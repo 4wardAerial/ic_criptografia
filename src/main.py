@@ -11,11 +11,11 @@ if __name__ == "__main__":
     inter.inicio()
 
     DIR = Path(__file__).resolve().parent
-    usuario_txt: Path = DIR / "src" / "arquivos" / "dados" / "dados_usuario.txt"
-    outros_txt: Path = DIR / "src" / "arquivos" / "dados" / "dados_publicos.txt"
-    msg_txt: Path = DIR / "src" / "arquivos" / "mensagens" / "msg.txt"
-    cyph_txt: Path = DIR / "src" / "arquivos" / "mensagens" / "cyph.txt"
-    primos_txt: Path = DIR / "src" / "arquivos" / "dados" / "primos.txt"
+    usuario_txt: Path = DIR / "arquivos" / "dados" / "dados_usuario.txt"
+    outros_txt: Path = DIR / "arquivos" / "dados" / "dados_publicos.txt"
+    msg_txt: Path = DIR / "arquivos" / "mensagens" / "msg.txt"
+    cyph_txt: Path = DIR  / "arquivos" / "mensagens" / "cyph.txt"
+    primos_txt: Path = DIR  / "arquivos" / "dados" / "primos.txt"
 
     sair: bool = False
     while True:
@@ -206,12 +206,17 @@ if __name__ == "__main__":
 
             n, e, d = cpt.calculadora_chaves_RSA(p, q)
             inter.print_chaves(p, q, n, e, d)
-            # Salva as novas chaves públicas no arquivo do usuário
-            with usuario_txt.open('w', encoding="utf-8") as dutxt:
-                cpub: str = f"{n}\n{e}"
-                dutxt.write(cpub)
-            sleep(0.7)
-            inter.atualiza_chaves()
+            mudar: int = inter.mudar_ou_nao()
+
+            if mudar == 1:
+                # Salva as novas chaves públicas no arquivo do usuário
+                with usuario_txt.open('w', encoding="utf-8") as dutxt:
+                    cpub: str = f"{n}\n{e}"
+                    dutxt.write(cpub)
+                sleep(0.7)
+                inter.atualiza_chaves()
+            elif mudar == 2:
+                inter.nao_atualiza_chaves()
 
         sleep(1)
         rep: int = inter.repetir()

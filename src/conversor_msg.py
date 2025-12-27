@@ -57,6 +57,7 @@ def converter_para_decimal(msg: str, n: int) -> list[int]:
     # Inclui a ultima parte
     if parte_decimal:
         decimais.append(int(parte_decimal))
+
     return decimais
 
 '''

@@ -82,7 +82,7 @@ def arq_inexistente(nome: str):
     sleep(1)
     print(f"Certifique-se que há um arquivo de nome \"{nome}.txt\" no diretório:")
     sleep(0.3)
-    print("~\\mensagens\\arquivos")
+    print("~sistema\\content\\src\\arquivos\\mensagens")
     sleep(0.7)
 
 ##################################################
@@ -141,7 +141,7 @@ def RSA_cripto_arq(outros_dict: dict) -> tuple:
 def arq_criptografado():
     print("\nSeu arquivo foi criptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
-    print("~\\arquivos\\mensagens\\cyph.txt")
+    print("~sistema\\content\\src\\arquivos\\mensagens\\cyph.txt")
     sleep(0.7)
 
 ##################################################
@@ -177,36 +177,7 @@ def RSA_decripto_arq(repete: bool) -> int:
 def arq_decriptografado():
     print("\nSeu arquivo foi descriptografado com sucesso! Ele pode ser encontrado em:")
     sleep(0.5)
-    print("~\\arquivos\\mensagens\\msg.txt")
-    sleep(0.7)
-
-##################################################
-def criar_chaves():
-    cls()
-    print("\nCriar chaves RSA")
-    print("---------------------")
-    sleep(0.5)
-
-def print_chaves(p: int, q: int, n: int, e: int, d: int):
-    print("\nOs primos escolhidos foram:")
-    sleep(0.5)
-    print(f"{p} e {q}")
-    sleep(0.5)
-    print("\nO par de chaves públicas 'n, e' gerado foi:")
-    sleep(0.5)
-    print(f"{n} e {e}")
-    sleep(0.5)
-    print("\nA chave privada 'd' gerada foi:")
-    sleep(0.5)
-    print(d)
-    sleep(0.7)
-
-def atualiza_chaves():
-    print("\nSua chave pública foi atualizada no sistema! Ela pode ser encontrada em:")
-    sleep(0.5)
-    print("~\\arquivos\\dados\\dados_usuario.txt")
-    sleep(0.5)
-    print("Sua chave privada não será salva! Guarde-a em um local seguro.")
+    print("~sistema\\content\\src\\arquivos\\mensagens\\msg.txt")
     sleep(0.7)
 
 ##################################################
@@ -273,6 +244,48 @@ def atualiza_arq_outros(nome: str, achou: bool = False, remover: bool = False):
             print(f"\n{nome} não estava no sistema.")
         else:
             print(f"\n{nome} foi adicionad@ ao sistema e está pront@ para receber mensagens!")
+    sleep(0.7)
+
+##################################################
+def criar_chaves():
+    cls()
+    print("\nCriar chaves RSA")
+    print("---------------------")
+    sleep(0.5)
+
+def print_chaves(p: int, q: int, n: int, e: int, d: int):
+    print("\nOs primos escolhidos foram:")
+    sleep(0.5)
+    print(f"{p} e {q}")
+    sleep(0.5)
+    print("\nO par de chaves públicas 'n, e' gerado foi:")
+    sleep(0.5)
+    print(f"{n} e {e}")
+    sleep(0.5)
+    print("\nA chave privada 'd' gerada foi:")
+    sleep(0.5)
+    print(d)
+    sleep(0.7)
+
+def mudar_ou_nao() -> int:
+    print("\nDeseja mudar as próprias chaves para as novas geradas?")
+    sleep(0.5)
+    print("1) Mudar")
+    sleep(0.3)
+    print("2) Não mudar")
+    sleep(0.5)
+    return escolha_opcoes(('1', '2'))
+
+def atualiza_chaves():
+    print("\nSua chave pública foi atualizada no sistema! Ela pode ser encontrada em:")
+    sleep(0.5)
+    print("~sistema\\content\\src\\arquivos\\dados\\dados_usuario.txt")
+    sleep(0.5)
+    print("Sua chave privada não será salva! Guarde-a em um local seguro.")
+    sleep(0.7)
+
+def nao_atualiza_chaves():
+    print("\nSuas chaves não foram alteradas.")
     sleep(0.7)
 
 ##################################################
