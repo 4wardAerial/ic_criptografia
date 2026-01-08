@@ -1,14 +1,13 @@
 # Sistema Criptográfico
-Esse repositório contém um projeto complementar à Iniciação Científica do PICME sobre Estruturas Algébricas e Criptografia, e consiste em um programa para criptografar e descriptografar mensagens ou arquivos de texto por sistemas de criptografia de chave pública estudados na IC; mais precisamente: *RSA*, *ElGamal* e *Curvas Elípticas*. No momento, apenas RSA foi implementada.
+Esse repositório contém um projeto complementar à Iniciação Científica do PICME sobre Estruturas Algébricas e Criptografia, e consiste em um programa para criptografar e descriptografar mensagens ou arquivos de texto por sistemas de criptografia de chave pública estudados na IC; mais precisamente: *RSA*, *ElGamal* e *Curvas Elípticas*. Para esse programa, apenas RSA foi implementada.
 
 O programa foi feito totalmente em Python e roda no terminal. Instruções para utilização podem ser encontradas abaixo. Os algoritmos para calcular a encriptação, bem como as funções necessárias para isso, foram baseados no livro usado na IC, *Algebra for Applications, A. Slinko*.
 
 ## Rodando o programa
-Sua máquina precisa ter ```Python 3``` instalado para rodar o programa.
-
-Após instalar a pasta compactada, extraia seu conteúdo e execute o arquivo ```sistema.exe```, encontrado dentro da pasta ```~\sistema```.
+Para roda o programa, basta instalar a pasta compactada. Isso pode ser feito clicando na seta do botão verde ```<> Code``` localizado acima e escolhendo a opção *Download ZIP*. Após a instalação, é necessário extrair o conteúdo da pasta e executar o arquivo ```sistema.exe```, encontrado dentro da pasta ```~\sistema```.
 
 > *OBS.*: É bem provável que o Windows flagre o exectuável como perigoso, já que não tem um certificado digital. Você pode ignorar o aviso.
+> *OBS. OBS.*: O programa foi testado em Windows e Linux Ubuntu, mas não em outras distros nem em macOS, então não posso garantir que funcione neles.
 
 ## Uso do programa
 Para selecionar uma opções nos menus, basta digitar o número daquela opção e pressionar *Enter*. Caso digite uma opção inválida, o sistema vai apenas recusá-la e pedir outra entrada.
