@@ -7,6 +7,7 @@ O programa foi feito totalmente em Python e roda no terminal. Instruções para 
 Para roda o programa, basta instalar a pasta compactada. Isso pode ser feito clicando na seta do botão verde ```<> Code``` localizado acima e escolhendo a opção *Download ZIP*. Após a instalação, é necessário extrair o conteúdo da pasta e executar o arquivo ```sistema.exe```, encontrado dentro da pasta ```~\sistema```.
 
 > *OBS.*: É bem provável que o Windows flagre o exectuável como perigoso, já que não tem um certificado digital. Você pode ignorar o aviso.
+
 > *OBS. OBS.*: O programa foi testado em Windows e Linux Ubuntu, mas não em outras distros nem em macOS, então não posso garantir que funcione neles.
 
 ## Uso do programa
